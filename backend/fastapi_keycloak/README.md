@@ -4,6 +4,17 @@ This boilerplate uses fastapi with keycloak.
 
 It provides basic authentication via jwt access token
 
+## Starting
+- First start keycloak and postgresql
+```sh
+docker compose up
+```
+- Then start the backend
+```sh
+cd api
+python -m main
+```
+
 ## Endpoints
 
 ### users
