@@ -50,6 +50,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     DOMAIN: str = "localhost"
     ENVIRONMENT: Literal["local", "development", "staging", "production", "mock"] = "local"
+    LOGCONFIG_PATH: str = "src/api_core/logging_config.json"
     # LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "DEBUG"
 
     @computed_field
@@ -103,6 +104,19 @@ class Settings(BaseSettings):
     
     # Email settings
     VERIFY_EMAIL: bool = False
+    SMTP_TLS: bool = True
+    SMTP_SLL: bool = False
+    SMTP_PORT: int = 587
+    SMTP_HOST: str | None = None
+    SMTP_USER: str | None = None
+    SMTP_PASSWORD: str | None = None
+    EMAILS_FROM_EMAIL: str | None = None
+    EMAILS_FROM_NAME: str | None = None
+
+    @computed_field
+    @property
+    def emails_enabled(self) -> bool:
+        return bool(self.SMTP_HOST and self.EMAILS_FROM_EMAIL)
 
 global_settings = Settings()   
 

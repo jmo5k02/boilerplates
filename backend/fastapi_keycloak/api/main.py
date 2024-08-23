@@ -4,9 +4,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.routing import APIRoute
 
-import src.api.api_v1
-from src.api.project_logger import setup_logging
-from src.api.init_db import create_tables
+import src.api_core.api_v1
+from src.api_core.project_logger import setup_logging
+from src.api_core.init_db import create_tables
 from settings import global_settings, set_cors_origins, custom_generate_unique_id
 
 
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    setup_logging("./src/_common/logging_config.json")
+    setup_logging(global_settings.LOGCONFIG_PATH)
     logger.info("Starting application")
     logger.info("Creating tables")
     create_tables()
@@ -42,7 +42,7 @@ def read_root(request: Request):
     return {"Hello": "World"}
 
 
-app.include_router(src.api.api_v1.router, prefix=global_settings.API_V1_STR, tags=["v1"])
+app.include_router(src.api_core.api_v1.router, prefix=global_settings.API_V1_STR, tags=["v1"])
 
 
 if __name__ == "__main__":

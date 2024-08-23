@@ -11,7 +11,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
 from settings import global_settings
-from src.api.database import get_db
+from src.api_core.database import get_db
 from src.auth.schemas import TokenData
 from src.users.models import User
 from src.auth.exceptions import credentials_exception, attribute_exception

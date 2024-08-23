@@ -6,7 +6,7 @@ import logging
 from pydantic import UUID4
 from fastapi import APIRouter
 
-from src.api.deps import DbSession
+from src.api_core.deps import DbSession
 from .schema import UserCreate, UserOutput
 from .service import UserService
 

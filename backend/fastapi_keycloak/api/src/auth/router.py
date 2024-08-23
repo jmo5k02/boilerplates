@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Request
 from fastapi.security import OAuth2PasswordRequestForm
 
-from src.api.deps import DbSession, GetUserManager, GetAuthenticationClient, CurrentUserAndToken
+from src.api_core.deps import DbSession, GetUserManager, GetAuthenticationClient, CurrentUserAndToken
 from src.users.schema import UserOutput, UserCreate
 from .schemas import Token
 from .service import AuthService

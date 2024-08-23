@@ -1,0 +1,88 @@
+<mjml>
+  <mj-head>
+    <mj-title>A Beautiful Email Template</mj-title>
+    <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <mj-attributes>
+      <mj-all font-family="Roboto, Helvetica, sans-serif" />
+    </mj-attributes>
+    <mj-style>
+      .link-hover:hover {
+        color: #ff6b6b !important;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-section background-color="#ffffff" padding-bottom="0px" padding-top="0">
+      <mj-column width="100%">
+        <mj-image src="https://via.placeholder.com/600x200" alt="Header Image" padding="0" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding-bottom="0px" padding-top="0">
+      <mj-column width="100%">
+        <mj-text font-size="30px" color="#626262" align="center" font-weight="bold" padding-top="30px">
+          Welcome to Our Newslettersasdf
+        </mj-text>
+        <mj-divider border-color="#ff6b6b" border-width="2px" width="100px" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding-bottom="20px" padding-top="20px">
+      <mj-column width="100%">
+        <mj-text font-size="16px" color="#626262" align="left" line-height="1.5">
+          Hello there,
+          <br><br>
+          We're excited to share our latest updates with you. Our team has been working hard to bring you the best content and offers.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#f8f8f8" padding="20px 0">
+      <mj-column width="33.33%">
+        <mj-image src="https://via.placeholder.com/200x200" alt="Feature 1" />
+        <mj-text font-size="20px" color="#626262" align="center" font-weight="bold">
+          Feature 1
+        </mj-text>
+        <mj-text font-size="14px" color="#626262" align="center">
+          Description of feature 1 goes here.
+        </mj-text>
+      </mj-column>
+      <mj-column width="33.33%">
+        <mj-image src="https://via.placeholder.com/200x200" alt="Feature 2" />
+        <mj-text font-size="20px" color="#626262" align="center" font-weight="bold">
+          Feature 2
+        </mj-text>
+        <mj-text font-size="14px" color="#626262" align="center">
+          Description of feature 2 goes here.
+        </mj-text>
+      </mj-column>
+      <mj-column width="33.33%">
+        <mj-image src="https://via.placeholder.com/200x200" alt="Feature 3" />
+        <mj-text font-size="20px" color="#626262" align="center" font-weight="bold">
+          Feature 3
+        </mj-text>
+        <mj-text font-size="14px" color="#626262" align="center">
+          Description of feature 3 goes here.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding-bottom="20px" padding-top="20px">
+      <mj-column width="100%">
+        <mj-button background-color="#ff6b6b" color="white" font-size="16px" align="center" padding="20px 0" border-radius="3px" href="#" css-class="link-hover">
+          Learn More
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#626262" padding="20px 0">
+      <mj-column width="100%">
+        <mj-text font-size="14px" color="#ffffff" align="center">
+          © 2024 Your Company. All rights reserved.
+          <br><br>
+          <a href="#" style="color: #ffffff; text-decoration: none;" class="link-hover">Unsubscribe</a> | <a href="#" style="color: #ffffff; text-decoration: none;" class="link-hover">View in Browser</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

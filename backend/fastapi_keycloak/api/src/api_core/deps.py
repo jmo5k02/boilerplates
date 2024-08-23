@@ -6,14 +6,14 @@ from fastapi import Depends
 from typing import Annotated
 
 from sqlalchemy.orm import Session
-from src.api.database import get_db
+from src.api_core.database import get_db
 
 from keycloak import KeycloakOpenID, KeycloakAdmin
 from src.auth.keycloak_clients import get_authentication_client, get_user_manager
 from src.auth.schemas import TokenData
 from src.users.models import User
 
-from src._common.security_utils import get_current_user_and_token
+from src.auth.security_utils import get_current_user_and_token
 
 logger = logging.getLogger(__name__)
 
