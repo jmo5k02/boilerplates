@@ -1,0 +1,12 @@
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T14:50:13.411577+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T14:50:13.411618+00:00", "logger": "root", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T14:50:13.411639+00:00", "logger": "root", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T14:50:42.196019+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T14:50:42.196060+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T14:50:42.196080+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T14:51:29.081983+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T14:51:29.082024+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T14:51:29.082043+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T14:52:10.705845+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T14:52:10.705922+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T14:52:10.705944+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}

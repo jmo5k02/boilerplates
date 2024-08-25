@@ -1,10 +1,7 @@
 # Use the official PostGIS image as the base image
-FROM postgres:13.16
+FROM postgres:16.4
 
-# Set environment variables
-ENV POSTGRES_USER=test
-ENV POSTGRES_PASSWORD=test
-ENV POSTGRES_DB=test
+ADD create.sql /docker-entrypoint-initdb.d
 
 # Expose the PostgreSQL port
 EXPOSE 5432
