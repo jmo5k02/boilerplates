@@ -78,11 +78,24 @@ def setup_logging(config_path: str) -> None:
     Parameters:
         config_path (str): The path to the logging configuration file.
     """
-    with open(pathlib.Path(config_path), "r") as f:
-        logging_config = json.load(f)
-    logging.config.dictConfig(logging_config)
+    try:
+        with open(pathlib.Path(config_path), "r") as f:
+            logging_config = json.load(f)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Logging configuration file not found at: {config_path}")
+    except json.JSONDecodeError:
+        print(f"Failed to parse logging configuration file: {config_path}")
+        raise
+
+    try:
+        logging.config.dictConfig(logging_config)
+    except Exception as e:
+        print(f"Error in logging configuration: {e}")
+        raise
+
     queue_handler = logging.getHandlerByName("queue_handler")
-    if queue_handler is not None:
-        queue_handler.listener.start()
-        atexit.register(queue_handler.listener.stop)
+    if queue_handler is None:
+        raise ValueError("queue_handler not found in logging configuration")
+    queue_handler.listener.start()
+    atexit.register(queue_handler.listener.stop)
     logging.info("logging configured")

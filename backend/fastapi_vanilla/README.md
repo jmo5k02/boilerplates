@@ -22,5 +22,5 @@ This example uses docker compose for development
 `docker compose exec fastapi_vanilla_web alembic upgrade head`
 
 ### Tests
-- Execute pytest
+- Execute pytest tests
 `docker compose exec fastapi_vanilla_web python -m pytest`
