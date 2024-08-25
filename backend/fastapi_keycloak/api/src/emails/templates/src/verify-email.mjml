@@ -1,0 +1,69 @@
+<mjml>
+  <mj-head>
+    <mj-title>Veryfi Email Verification</mj-title>
+    <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <mj-attributes>
+      <mj-all font-family="Roboto, Helvetica, sans-serif" />
+    </mj-attributes>
+    <mj-style>
+      .blue-text { color: #0056b3; }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-section background-color="#ffffff" padding-bottom="0px">
+      <mj-column width="100%">
+        <mj-image src="https://cdn.veryfi.com/logos/veryfi-logo-wide-black.png" alt="Veryfi Logo" width="200px" padding="20px 0" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff">
+      <mj-column>
+        <mj-text font-size="24px" color="#1a1a1a" align="center">
+          Verify Your Email Address
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          Hello,
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          Thank you for signing up with Veryfi. To complete your registration and start using our services, please verify your email address by clicking the button below:
+        </mj-text>
+        <mj-button background-color="#0056b3" color="white" href="https://www.veryfi.com/verify-email?token=[VERIFICATION_TOKEN]">
+          Verify Email Address
+        </mj-button>
+        <mj-text font-size="14px" color="#666666">
+          If you didn't create an account with Veryfi, please ignore this email.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff">
+      <mj-column>
+        <mj-text font-size="16px" color="#333333">
+          If the button above doesn't work, you can also copy and paste the following link into your browser:
+        </mj-text>
+        <mj-text font-size="14px" color="#0056b3" word-break="break-all">
+          https://www.veryfi.com/verify-email?token=[VERIFICATION_TOKEN]
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff">
+      <mj-column>
+        <mj-text font-size="16px" color="#333333">
+          If you have any questions or need assistance, please don't hesitate to contact our support team at support@veryfi.com.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#f4f4f4">
+      <mj-column>
+        <mj-text font-size="14px" color="#666666" align="center">
+          &copy; 2024 Veryfi, Inc. All rights reserved.
+        </mj-text>
+        <mj-text font-size="14px" color="#666666" align="center">
+          123 Tech Street, San Francisco, CA 94105
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
