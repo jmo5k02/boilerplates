@@ -35,7 +35,6 @@ class Settings(BaseSettings):
 
     # General Application settings
     PROJECT_NAME: str = "FastAPI Vanilla Boilerplate"
-    LOGCONFIG_PATH: str = "logging.yaml"
     BACKEND_CORS_ORIGINS: str = ""
     API_V1_STR: str = "/api/v1"
     ENVIRONMENT: Literal["dev", "stage", "prod"] = "dev"
@@ -52,6 +51,8 @@ class Settings(BaseSettings):
     def POSTGRES_DB(self) -> str:
         if not self.ENVIRONMENT:
             raise ValueError("ENVIRONMENT is not set")
+        if self.testing:
+            return f"app_test"
         return f"app_{self.ENVIRONMENT}"
 
     @computed_field
@@ -59,14 +60,6 @@ class Settings(BaseSettings):
     def SQLALCHEMY_DATABASE_URI(self) -> str:
         if not self.POSTGRES_SERVER_URL:
             raise ValueError("POSTGRES_SERVER_URL is not set")
-        print(MultiHostUrl.build(
-            scheme="postgresql+asyncpg",
-            username=self.POSTGRES_USER,
-            password=self.POSTGRES_PASSWORD,
-            host=self.POSTGRES_SERVER_URL,
-            port=self.POSTGRES_SERVER_PORT,
-            path=f"{self.POSTGRES_DB}",
-        ))
         return MultiHostUrl.build(
             scheme="postgresql+asyncpg",
             username=self.POSTGRES_USER,

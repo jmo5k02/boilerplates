@@ -187,3 +187,181 @@
 {"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T19:55:30.434203+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
 {"level": "INFO", "message": "application started", "timestamp": "2024-08-25T19:55:30.472892+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
 {"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T19:55:30.472975+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T19:59:26.965677+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T19:59:28.239058+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T19:59:28.239100+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T19:59:28.239120+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T19:59:28.278284+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T19:59:28.278371+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T19:59:43.817934+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:00:13.489640+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:00:13.489681+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:00:13.489701+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:00:13.536379+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:00:13.536464+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:00:20.754571+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:00:22.054278+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:00:22.054317+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:00:22.054337+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:00:22.093693+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:00:22.093782+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:00:36.129477+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:00:37.358107+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:00:37.358150+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:00:37.358182+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:00:37.396806+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:00:37.396905+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:00:54.939929+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:00:56.200040+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:00:56.200081+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:00:56.200101+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:00:56.258611+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:00:56.258703+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:02:40.217491+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:02:46.800909+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:02:46.800948+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:02:46.800968+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:02:46.848528+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:02:46.848639+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:03:30.956884+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:03:32.348294+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:03:32.348335+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:03:32.348355+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:03:32.390020+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:03:32.390109+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:03:41.512321+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:03:42.790270+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:03:42.790311+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:03:42.790387+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:03:42.836267+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:03:42.836354+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:04:46.184475+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:04:48.348345+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:04:48.348387+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:04:48.348406+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:04:48.386992+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:04:48.387057+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:06:06.179125+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:06:38.237126+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:06:38.237184+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:06:38.237206+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:06:38.278081+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:06:38.278143+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:08:10.201305+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:08:11.453276+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:08:11.453315+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:08:11.453335+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:08:11.492208+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:08:11.492287+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:09:40.701376+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:09:41.997885+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:09:41.997927+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:09:41.997948+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:09:42.038242+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:09:42.038343+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Loading config settings from environment", "timestamp": "2024-08-25T20:09:47.265948+00:00", "logger": "app_core", "module": "settings", "line": 77, "thread_name": "AnyIO worker thread"}
+{"level": "INFO", "message": "172.24.0.1:53900 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:09:47.268035+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:53900 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:09:48.001742+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:53900 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:09:48.502594+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:53900 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:09:48.832348+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:53900 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:09:49.026106+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:53900 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:09:49.169202+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:53900 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:09:49.336774+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:53910 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:09:54.717152+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:58208 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:13.153863+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:29.847726+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:30.279494+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:30.480521+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:30.638437+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:30.776697+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:30.946021+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:31.110778+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:31.327357+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:31.493110+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:31.658036+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:31.842049+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:32.027727+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "172.24.0.1:35980 - \"GET /api/health HTTP/1.1\" 200", "timestamp": "2024-08-25T20:10:32.198204+00:00", "logger": "uvicorn.access", "module": "h11_impl", "line": 476, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:12:55.130155+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:12:56.456620+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:12:56.456664+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:12:56.456684+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:12:56.499520+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:12:56.499609+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:12:59.124034+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:12:59.124106+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:12:59.124138+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:12:59.161114+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "HTTP Request: GET http://testserver/ping \"HTTP/1.1 404 Not Found\"", "timestamp": "2024-08-25T20:12:59.162783+00:00", "logger": "httpx", "module": "_client", "line": 1026, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:13:09.431830+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:13:10.659009+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:13:10.659053+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:13:10.659073+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:13:10.699492+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:13:10.699585+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:13:13.425185+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:13:13.425258+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:13:13.425289+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:13:13.466227+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "HTTP Request: GET http://testserver/api/ping \"HTTP/1.1 404 Not Found\"", "timestamp": "2024-08-25T20:13:13.468031+00:00", "logger": "httpx", "module": "_client", "line": 1026, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:13:39.169857+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:13:40.420491+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:13:40.420534+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:13:40.420555+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:13:40.458637+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:13:40.458720+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:14:40.816070+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:14:42.094378+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:14:42.094416+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:14:42.094437+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:14:42.135111+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:14:42.135212+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:14:45.583829+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:14:45.583900+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:14:45.583931+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:14:45.623624+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "HTTP Request: GET http://testserver/api/health \"HTTP/1.1 200 OK\"", "timestamp": "2024-08-25T20:14:45.627040+00:00", "logger": "httpx", "module": "_client", "line": 1026, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:15:17.427032+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:15:18.685054+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:15:18.686239+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:15:18.686270+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:15:18.724532+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:15:18.724625+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:15:20.895971+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:15:20.896044+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:15:20.896075+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:15:20.938433+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "HTTP Request: GET http://testserver/api/health \"HTTP/1.1 200 OK\"", "timestamp": "2024-08-25T20:15:20.942482+00:00", "logger": "httpx", "module": "_client", "line": 1026, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:15:29.751493+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:15:31.030991+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:15:31.031029+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:15:31.031049+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:15:31.069662+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:15:31.069750+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:15:32.993449+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:15:32.993523+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:15:32.993554+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:15:33.033473+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "HTTP Request: GET http://testserver/api/health \"HTTP/1.1 200 OK\"", "timestamp": "2024-08-25T20:15:33.037795+00:00", "logger": "httpx", "module": "_client", "line": 1026, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:15:51.118133+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:15:52.403025+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:15:52.403067+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:15:52.403088+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:15:52.442917+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:15:52.443006+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:15:54.384254+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:15:54.384325+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:15:54.384361+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:15:54.422163+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "HTTP Request: GET http://testserver/api/health \"HTTP/1.1 200 OK\"", "timestamp": "2024-08-25T20:15:54.428274+00:00", "logger": "httpx", "module": "_client", "line": 1026, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T20:16:51.484800+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:16:52.717204+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:16:52.717246+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:16:52.717266+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:16:52.756188+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T20:16:52.756276+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T20:16:57.228567+00:00", "logger": "root", "module": "project_logger", "line": 88, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T20:16:57.228635+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T20:16:57.228668+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T20:16:57.268522+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "ThreadPoolExecutor-0_0"}
+{"level": "INFO", "message": "HTTP Request: GET http://testserver/api/health \"HTTP/1.1 200 OK\"", "timestamp": "2024-08-25T20:16:57.273566+00:00", "logger": "httpx", "module": "_client", "line": 1026, "thread_name": "MainThread"}

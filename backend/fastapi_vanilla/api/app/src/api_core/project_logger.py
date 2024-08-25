@@ -1,6 +1,7 @@
 import datetime as dt
 import json
 import logging
+import logging.config
 import atexit
 import pathlib
 from typing import override
