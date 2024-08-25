@@ -181,3 +181,9 @@
 {"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T19:51:08.825505+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
 {"level": "INFO", "message": "application started", "timestamp": "2024-08-25T19:51:08.868463+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
 {"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T19:51:08.868547+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Shutting down", "timestamp": "2024-08-25T19:55:29.211628+00:00", "logger": "uvicorn.error", "module": "server", "line": 258, "thread_name": "MainThread"}
+{"level": "INFO", "message": "logging configured", "timestamp": "2024-08-25T19:55:30.434128+00:00", "logger": "root", "module": "project_logger", "line": 87, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Starting application", "timestamp": "2024-08-25T19:55:30.434166+00:00", "logger": "app_core", "module": "main", "line": 14, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Initializing database", "timestamp": "2024-08-25T19:55:30.434203+00:00", "logger": "app_core", "module": "main", "line": 15, "thread_name": "MainThread"}
+{"level": "INFO", "message": "application started", "timestamp": "2024-08-25T19:55:30.472892+00:00", "logger": "app_core", "module": "main", "line": 17, "thread_name": "MainThread"}
+{"level": "INFO", "message": "Application startup complete.", "timestamp": "2024-08-25T19:55:30.472975+00:00", "logger": "uvicorn.error", "module": "on", "line": 62, "thread_name": "MainThread"}
