@@ -1,0 +1,12 @@
+volumes:
+  fastapi_pg_data:
+
+services:
+  postgres:
+    build:
+      context: ./postgresql
+      dockerfile: Dockerfile
+    volumes:
+      - fastapi_pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
