@@ -15,6 +15,9 @@ This example uses docker compose for development
 ## Backend
 
 ### Database
+#### Adding a new table
+- Create a table definition by letting it inherit from Base defined in `app/src/db/database.py`
+- Import that new table definition into `migrations/env.py`
 - Create a database migration revision
 `docker compose exec fastapi_vanilla_web alembic revision --autogenerate -m "<migration-name>"`
 - Checkout the revision under `api/migrations/versions`

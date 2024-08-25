@@ -9,6 +9,8 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
+# THIS IMPORT IS IMPORTANT SO THAT ALL TABLE GET CREATED
+from app.src.api_core.db.database import Base
 ${imports if imports else ""}
 
 # revision identifiers, used by Alembic.

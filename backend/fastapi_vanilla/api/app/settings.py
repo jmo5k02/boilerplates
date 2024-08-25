@@ -41,7 +41,8 @@ class Settings(BaseSettings):
     testing: bool = bool(0)
 
     # Database settings
-    POSTGRES_SERVER_URL: str | None 
+    POSTGRES_SERVER_URL: str | None
+    POSTGRES_SERVER_HOST: str | None 
     POSTGRES_SERVER_PORT: int | None = None
     POSTGRES_USER: str | None = None
     POSTGRES_PASSWORD: str | None = None

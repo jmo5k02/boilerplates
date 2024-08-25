@@ -4,7 +4,7 @@ from sqlalchemy import String
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy.dialects.postgresql import UUID
 
-from app.src.api_core.database import Base
+from app.src.api_core.db.database import Base
 
 class User(Base):
     __tablename__ = "user"

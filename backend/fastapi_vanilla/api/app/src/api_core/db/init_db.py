@@ -1,4 +1,5 @@
 from .database import Base, engine
+from app.src.users.model import User
 
 
 async def create_tables():

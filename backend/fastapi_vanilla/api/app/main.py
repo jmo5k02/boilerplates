@@ -18,26 +18,18 @@ async def lifespan(app: FastAPI):
         print(f"Error setting up logging: {e}")
         raise
     logger.info("Starting application")
-    logger.info("Initializing database")
-    await init_db.create_tables()
+    # logger.info("Initializing database")
+    # await init_db.create_tables()
     logger.info("application started")
     yield
+    logger.info("application shutting down")
 
 def create_application() -> FastAPI:
     application = FastAPI(
         lifespan=lifespan,
     )
-    application.include_router(
-        health.router,
-        tags=["health"],
-        prefix="/api",
-    )
-
-    application.include_router(
-        api_v1.router,
-        prefix="/api/v1",
-        tags=["v1"],
-)
+    application.include_router(health.router, prefix="/api", tags=["health"])
+    application.include_router(api_v1.router, prefix="/api/v1", tags=["v1"])
     return application
 
 app = create_application()

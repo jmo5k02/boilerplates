@@ -18,10 +18,13 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-from app.src.api_core.database import Base
+from app.src.api_core.db.database import Base
 from app.src.users.model import User
+from app.src.summaries.model import Summary
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
+print("Detected models:", [model.__name__ for model in Base.__subclasses__()])
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
