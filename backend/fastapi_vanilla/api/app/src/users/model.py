@@ -1,10 +1,12 @@
 import uuid
 from typing import List
+
 from sqlalchemy import String
-from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.src.api_core.db.database import Base
+
 
 class User(Base):
     __tablename__ = "user"

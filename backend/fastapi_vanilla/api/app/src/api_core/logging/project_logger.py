@@ -1,8 +1,8 @@
+import atexit
 import datetime as dt
 import json
 import logging
 import logging.config
-import atexit
 import pathlib
 from typing import override
 
@@ -26,7 +26,8 @@ LOG_RECORD_BUILTIN_ATTRS = {
     "process",
     "processName",
     "relativeCreated",
-    "stack_info", "thread",
+    "stack_info",
+    "thread",
     "threadName",
     "taskName",
 }
@@ -38,11 +39,7 @@ class JSONFormatter(logging.Formatter):
     This formatter is used to format log records as JSON objects.
     """
 
-    def __init__(
-            self,
-            *,
-            fmt_keys: dict[str, str] | None = None
-    ):
+    def __init__(self, *, fmt_keys: dict[str, str] | None = None):
         super().__init__()
         self.fmt_keys = fmt_keys if fmt_keys is not None else {}
 
@@ -61,9 +58,11 @@ class JSONFormatter(logging.Formatter):
             always_fields["stack_info"] = self.formatStack(record.stack_info)
 
         message = {
-            key: msg_val
-            if (msg_val := always_fields.pop(val, None)) is not None
-            else getattr(record, val)
+            key: (
+                msg_val
+                if (msg_val := always_fields.pop(val, None)) is not None
+                else getattr(record, val)
+            )
             for key, val in self.fmt_keys.items()
         }
         message.update(always_fields)
@@ -73,7 +72,7 @@ class JSONFormatter(logging.Formatter):
 
 def setup_logging(config_path: str) -> None:
     """Setup the logging configuration.
-    The config is loaded from a JSON file  
+    The config is loaded from a JSON file
     Also starts the queue handler listener asynchronously so that logs are processed in the background.
     Parameters:
         config_path (str): The path to the logging configuration file.
@@ -82,7 +81,9 @@ def setup_logging(config_path: str) -> None:
         with open(pathlib.Path(config_path), "r") as f:
             logging_config = json.load(f)
     except FileNotFoundError:
-        raise FileNotFoundError(f"Logging configuration file not found at: {config_path}")
+        raise FileNotFoundError(
+            f"Logging configuration file not found at: {config_path}"
+        )
     except json.JSONDecodeError:
         print(f"Failed to parse logging configuration file: {config_path}")
         raise

@@ -1,13 +1,13 @@
 import logging
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Depends
+
+from fastapi import FastAPI
 
 from app.src.api_core.logging.project_logger import setup_logging
-from app.src.api_core.db import init_db
 from app.src.api_core.routers import api_v1, health
 
-
 logger = logging.getLogger("app_core")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -24,6 +24,7 @@ async def lifespan(app: FastAPI):
     yield
     logger.info("application shutting down")
 
+
 def create_application() -> FastAPI:
     application = FastAPI(
         lifespan=lifespan,
@@ -32,5 +33,5 @@ def create_application() -> FastAPI:
     application.include_router(api_v1.router, prefix="/api/v1", tags=["v1"])
     return application
 
-app = create_application()
 
+app = create_application()

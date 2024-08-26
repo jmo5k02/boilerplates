@@ -1,7 +1,8 @@
 from typing import AsyncGenerator
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, AsyncEngine
+
+from sqlalchemy.ext.asyncio import (AsyncEngine, AsyncSession,
+                                    create_async_engine)
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
-from sqlalchemy.pool import QueuePool
 
 from app.settings import settings
 
@@ -16,12 +17,20 @@ async_SessionLocal = sessionmaker(
     expire_on_commit=False,
 )
 
+
 class Base(DeclarativeBase):
     pass
+
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """
     Create an async sqlalchemy session and yield it
     """
     async with async_SessionLocal() as session:
-        yield session
+        try:
+            yield session
+        except Exception as e:
+            await session.rollback()
+            raise e
+        finally:
+            await session.close()

@@ -39,7 +39,7 @@ services:
       - BACKEND_CORS_ORIGINS="http://localhost:5173"
       # Database settings
       - POSTGRES_SERVER_URL=postgresql+asyncpg://test:test@fastapi_vanilla_postgres:5432/app_dev
-      - POSTGRES_SERVER_TEST_URL=postgresql://test:test@fastapi_vanilla_postgres:5432/app_test
+      - POSTGRES_SERVER_TEST_URL=postgresql+asyncpg://test:test@fastapi_vanilla_postgres:5432/app_test
       - POSTGRES_SERVER_HOST=fastapi_vanilla_postgres
       - POSTGRES_SERVER_PORT=5432
       - POSTGRES_USER=test

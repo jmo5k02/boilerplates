@@ -1,11 +1,10 @@
 import asyncio
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
-
-from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -19,8 +18,9 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 from app.src.api_core.db.database import Base
-from app.src.users.model import User
 from app.src.summaries.model import Summary
+from app.src.users.model import User
+
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 print("Detected models:", [model.__name__ for model in Base.__subclasses__()])

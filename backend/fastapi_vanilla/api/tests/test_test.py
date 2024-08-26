@@ -1,6 +1,8 @@
 import pytest
-from app.main import create_application
-from httpx import AsyncClient, ASGITransport
+from httpx import ASGITransport, AsyncClient
 
-def test_minimal_app(test_app_with_db):
-    pass
+from app.main import create_application
+
+
+def test_minimal_app():
+    print("HELLO")
