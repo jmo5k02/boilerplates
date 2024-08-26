@@ -1,5 +1,3 @@
-from app import main
-
 
 def test_health(test_app):
     # Given

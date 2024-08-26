@@ -4,16 +4,15 @@ import os
 import pytest
 from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
-from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import (AsyncEngine, AsyncSession,
                                     create_async_engine)
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import sessionmaker
 
 from app.main import create_application
 from app.settings import Settings, get_settings
 from app.src.api_core.db.database import Base, get_db
-from app.src.summaries.model import Summary
 # Database model imports
+from app.src.summaries.model import Summary
 from app.src.users.model import User
 
 
