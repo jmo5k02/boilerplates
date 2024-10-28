@@ -5,8 +5,8 @@ from app.utils.base_classes.base_schema import AppBaseSchema
 
 class TenantBase(AppBaseSchema):
     name: str
-    description: str
-    default: bool
+    description: Optional[str] = Field(None, nullable=True)
+    default: Optional[bool] = Field(False, nullable=True)
 
 
 class TenantCreate(TenantBase):
@@ -19,6 +19,6 @@ class TenantUpdate(AppBaseSchema):
     default: Optional[bool] = Field(False, nullable=True)
 
 class TenantRead(TenantBase):
-    id: UUID4
+    id: Optional[UUID4] = Field(None, nullable=True)
     slug: str
 

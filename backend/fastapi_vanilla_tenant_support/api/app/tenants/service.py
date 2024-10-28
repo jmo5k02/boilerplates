@@ -1,7 +1,8 @@
 from typing import Optional
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from pydantic import UUID4
+from pydantic import UUID4, ValidationError
 
 from app.utils.base_classes.base_service import BaseService
 from .models import Tenant
@@ -12,6 +13,7 @@ from .repository import TenantRepository
 class TenantService(BaseService[Tenant, TenantCreate, TenantUpdate, TenantRead]):
     def __init__(self, session: AsyncSession):
         super().__init__(TenantRepository, session)
+        self.session = session
 
     async def get_default(self) -> Optional[Tenant]:
         """Gets the default tenant"""
@@ -35,11 +37,16 @@ class TenantService(BaseService[Tenant, TenantCreate, TenantUpdate, TenantRead])
 
     async def get_by_slug(self, slug: str) -> Optional[Tenant]:
         """Gets a tenant by slug"""
-        pass
+        query = select(Tenant).where(Tenant.slug == slug)
+        tenant = await self.session.execute(query)
+        return tenant.scalar_one_or_none()
 
     async def get_by_slug_or_raise(self, tenant_in: TenantRead) -> Tenant:
         """Gets a tenant by slug or raises an exception"""
-        pass
+        tenant = await self.get_by_slug(tenant_in.slug)
+        if not tenant:
+            raise ValueError("Tenant not found")
+        return tenant
 
     async def create(self, obj_in: TenantCreate) -> Tenant:
         """Creates a new tenant"""

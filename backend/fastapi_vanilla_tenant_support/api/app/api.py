@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from fastapi import APIRouter
 
-from app.auth.routes import router as auth_router
+from app.auth.routes import user_router, auth_router
 
 class ErrorMessage(BaseModel):
     msg: str
@@ -20,6 +20,8 @@ api_router = APIRouter(
 )
 
 api_router.include_router(auth_router, prefix="/{tenant}/auth", tags=["auth"])
+
+api_router.include_router(user_router, prefix="/{tenant}/users", tags=["users"])
 
 # All routes that require an authenticated user should be in this router
 authenticated_user_api_router = APIRouter()

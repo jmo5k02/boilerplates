@@ -5,12 +5,12 @@ from typing import Generic, TypeVar, Type
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.base import Base
-from app.core.base_classes.base_schema import CustomBaseSchema
+from app.utils.base_classes.base_schema import AppBaseSchema
 
 
 DatabaseModelType = TypeVar('DatabaseModelType', bound=Base) # type: ignore
-CreateSchemaType = TypeVar('CreateSchemaType', bound=CustomBaseSchema)
-UpdateSchemaType = TypeVar('UpdateSchemaType', bound=CustomBaseSchema)
+CreateSchemaType = TypeVar('CreateSchemaType', bound=AppBaseSchema)
+UpdateSchemaType = TypeVar('UpdateSchemaType', bound=AppBaseSchema)
 
 class BaseRepository(Generic[DatabaseModelType]):
     """
