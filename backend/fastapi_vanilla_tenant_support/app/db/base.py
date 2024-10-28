@@ -2,7 +2,8 @@ import functools
 import re
 
 from sqlalchemy import inspect
-from sqlalchemy.ext.declarative import declarative_base, declared_attr
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.ext.declarative import declared_attr
 
 
 def resolve_table_name(name):
@@ -22,8 +23,7 @@ def resolve_attr(obj, attr, default=None):
         return default
 
 
-
-class CustomBase:
+class Base(DeclarativeBase):
     __repr_attrs__ = []
     __repr_max_length__ = 15
 
@@ -52,9 +52,8 @@ class CustomBase:
         for key in self.__repr_attrs__:
             if not hasattr(self, key):
                 raise KeyError(
-                    "{} has incorrect attribute '{}' in " "__repr__attrs__".format(
-                        self.__class__, key
-                    )
+                    "{} has incorrect attribute '{}' in "
+                    "__repr__attrs__".format(self.__class__, key)
                 )
             value = getattr(self, key)
             wrap_in_quote = isinstance(value, str)
@@ -78,6 +77,3 @@ class CustomBase:
             id_str,
             " " + self._repr_attrs_str if self._repr_attrs_str else "",
         )
-
-
-Base = declarative_base(cls=CustomBase)

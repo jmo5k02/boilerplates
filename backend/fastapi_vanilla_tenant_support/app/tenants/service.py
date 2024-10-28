@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import UUID4
 
-from app.core.base_service import BaseService
+from app.core.base_classes.base_service import BaseService
 from .models import Tenant
 from .schemas import TenantCreate, TenantUpdate, TenantRead
 from .repository import TenantRepository
