@@ -34,9 +34,9 @@ services:
     environment:
       # General Application settings
       - PROJECT_NAME="FastAPI Vanilla BOILERPLATE"
+      - BACKEND_CORS_ORIGINS="http://localhost:5173"
       - ENVIRONMENT=dev
       - TESTING=0
-      - BACKEND_CORS_ORIGINS="http://localhost:5173"
       # Database settings
       - POSTGRES_SERVER_URL=postgresql+asyncpg://test:test@fastapi_vanilla_postgres:5432/app_dev
       - POSTGRES_SERVER_TEST_URL=postgresql+asyncpg://test:test@fastapi_vanilla_postgres:5432/app_test

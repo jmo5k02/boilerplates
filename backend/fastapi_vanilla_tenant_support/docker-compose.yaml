@@ -1,0 +1,64 @@
+volumes:
+  fastapi_vts_pg_data:
+  fastapi_vts_pgadmin-data:
+
+services:
+  fastapi_vts_postgres:
+    build:
+      context: ./postgresql
+    command: postgres
+    volumes:
+      - fastapi_vts_pg_data:/var/lib/postgresql/data
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+
+
+  fastapi_vts_pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
+      PGADMIN_DEFAULT_PASSWORD: strong-password
+    volumes:
+      - fastapi_vts_pgadmin-data:/var/lib/pgadmin
+    logging:
+      driver: "none"
+
+
+  fastapi_vts_api:
+    build:
+      context: ./api
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - 8000:8000
+    command: [
+      uvicorn, app.main:app, 
+      --reload, 
+      --workers=1,
+      --host=0.0.0.0,
+      --port=8000,
+    ]
+    environment:
+      # General Application settings
+      - PROJECT_NAME="FastAPI Vanilla BOILERPLATE"
+      - ENVIRONMENT=dev
+      - TESTING=0
+      - BACKEND_CORS_ORIGINS="http://localhost:5173"
+      # Database settings
+      - POSTGRES_SERVER_URL=postgresql+asyncpg://test:test@fastapi_vanilla_postgres:5432/app_dev
+      - POSTGRES_SERVER_TEST_URL=postgresql+asyncpg://test:test@fastapi_vanilla_postgres:5432/app_test
+      - POSTGRES_SERVER_HOST=fastapi_vts_postgres
+      - POSTGRES_SERVER_PORT=5432
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    
+    

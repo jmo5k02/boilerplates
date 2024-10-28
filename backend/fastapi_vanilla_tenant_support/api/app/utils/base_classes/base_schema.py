@@ -10,7 +10,7 @@ def datetime_to_gmt_str(dt: datetime) -> str:
 
     return dt.strftime("%Y-%m-%dT%H:%M:%S%z")
 
-class CustomBaseSchema(BaseModel):
+class AppBaseSchema(BaseModel):
     model_config = ConfigDict(
         json_encoders={datetime: datetime_to_gmt_str},
         populate_by_name=True

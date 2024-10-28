@@ -57,6 +57,8 @@ class BaseService(
         - The repository must implement the BaseRepository interface
         - Services inheriting from this class should specify all four type parameters
     """
+    obj_not_found_error = HTTPException(status_code=404, detail=f"{DatabaseModelType.__name__} not found")
+
     def __init__(self, repository: BaseRepository, session: AsyncSession):
         self.repository = repository(session)
         self.output_schema: Type[OutputSchemaType] = self.__orig_bases__[0].__args__[3]
@@ -73,7 +75,7 @@ class BaseService(
     async def get(self, id: UUID4) -> OutputSchemaType:
         obj = await self.repository.get(id)
         if not obj:
-            raise HTTPException(status_code=404, detail="Object not found")
+            raise self.obj_not_found_error
         return obj
 
     async def get_all(self, skip: int = 0, limit: int = 100) -> list[OutputSchemaType]:
@@ -83,10 +85,10 @@ class BaseService(
     async def update(self, id: UUID4, obj_in: UpdateSchemaType) -> OutputSchemaType:
         obj = await self.repository.update(id, obj_in)
         if not obj:
-            raise HTTPException(status_code=404, detail="Object not found")
+            raise self.obj_not_found_error
         return self.output_schema(**obj.__dict__)
 
     async def delete(self, id: UUID4) -> bool:
         if not await self.repository.delete(id):
-            raise HTTPException(status_code=404, detail="Object not found")
+            raise self.obj_not_found_error
         return True

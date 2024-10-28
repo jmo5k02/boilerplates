@@ -5,6 +5,7 @@ from fastapi import HTTPException, status
 from fastapi.requests import Request
 
 from app.tenants.service import TenantService
+from app.tenants.schemas import TenantRead
 
 log = logging.getLogger(__name__)
 
@@ -37,8 +38,8 @@ class BasePermission(ABC):
     ```
     """
 
-    ten_error_msg = [{"msg": "Tenant not found. Please, contact admin"}]
-    ten_error_code = status.HTTP_404_NOT_FOUND
+    tenant_error_msg = [{"msg": "Tenant not found. Please, contact admin"}]
+    tenant_error_code = status.HTTP_404_NOT_FOUND
 
     user_error_msg = [{"msg": "User not found. Please, contact admin"}]
     user_error_code = status.HTTP_404_NOT_FOUND
@@ -53,13 +54,37 @@ class BasePermission(ABC):
     role = None
 
     @abstractmethod
-    def has_required_permissions(self, request: Request) -> bool: ...
+    async def has_required_permissions(self, request: Request) -> bool: ...
 
-    def __init__(self, request: Request):
+    async def __call__(self, request: Request, tenant_service: TenantService):
         tenant = None
         if request.path_params.get("tenant"):
-            tenant = TenantService
-        
+            tenant = await tenant_service.get_by_slug_or_raise(
+                tenant_in=TenantRead(
+                    name=request.path_params.get("tenant"),
+                    slug=request.path_params.get("tenant"),
+                )
+            )
+        elif request.query_params.get("tenant_id"):
+            tenant = await tenant_service.get(id=request.query_params.get("tenant_id"))
+
+        if not tenant:
+            raise HTTPException(
+                status_code=self.tenant_error_code, detail=self.tenant_error_msg
+            )
+
+        user = get_current_user(request)
+        if not user:
+            raise HTTPException(
+                status_code=self.user_error_code, detail=self.user_error_msg
+            )
+
+        self.role = user.get_tenant_role(tenant.slug)
+        if not self.has_required_permissions(request):
+            raise HTTPException(
+                status_code=self.user_role_error_code, detail=self.user_role_error_msg
+            )
+
 
 class PermissionsDependency(object):
     """
@@ -88,4 +113,7 @@ class PermissionsDependency(object):
         for permission_class in self.permission_classes:
             permission_class(request=request)
 
-        
+
+class TenantOwnerPermission(BasePermission):
+    async def has_required_permissions(self, request: Request) -> bool:
+        pass

@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import UUID4
 
-from app.core.base_classes.base_service import BaseService
+from app.utils.base_classes.base_service import BaseService
 from .models import Tenant
 from .schemas import TenantCreate, TenantUpdate, TenantRead
 from .repository import TenantRepository
@@ -31,6 +31,14 @@ class TenantService(BaseService[Tenant, TenantCreate, TenantUpdate, TenantRead])
 
     async def get_by_name_or_default(self, name: str) -> Tenant:
         """Gets a tenant by name or returns the default tenant"""
+        pass
+
+    async def get_by_slug(self, slug: str) -> Optional[Tenant]:
+        """Gets a tenant by slug"""
+        pass
+
+    async def get_by_slug_or_raise(self, tenant_in: TenantRead) -> Tenant:
+        """Gets a tenant by slug or raises an exception"""
         pass
 
     async def create(self, obj_in: TenantCreate) -> Tenant:

@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import TypeVar, Type, Optional
 
 from pydantic import UUID4
-from sqlalchemy import DateTime, event, select
+from sqlalchemy import DateTime, event, select, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -11,7 +11,7 @@ T = TypeVar("T", bound="CustomBase")
 
 class UUIDMixin(object):
     """UUID mixin"""
-    id: Mapped[uuid.UUID] = mapped_column(UUID4, primary_key=True, index=True, unique=True)
+    id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, index=True, unique=True, default=uuid.uuid4)
 
 
 class TimeStampMixin(object):

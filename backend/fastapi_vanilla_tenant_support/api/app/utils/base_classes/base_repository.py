@@ -19,6 +19,12 @@ class BaseRepository(Generic[DatabaseModelType]):
       model (Type[DatabaseModelType]): The database model class that the repository will be working with. 
         You HAVE TO pass a model that inherits from the Base class in the database module.
       session (AsyncSession): The database session that the repository will be working with.
+    Examples:
+    ```python
+    class AvailableModelRepository(BaseRepository[AvailableModel]):
+        def __init__(self, session: Session):
+            super().__init__(AvailableModel, session)
+    ```
     """
     def __init__(self, model: Type[DatabaseModelType], session: AsyncSession):
         self.model = model
