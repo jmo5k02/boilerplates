@@ -12,6 +12,10 @@ def datetime_to_gmt_str(dt: datetime) -> str:
 
 class AppBaseSchema(BaseModel):
     model_config = ConfigDict(
+        from_attributes=True,
+        validate_assignment=True,
+        arbitrary_types_allowed=True,
+        str_strip_whitespace=True,
         json_encoders={datetime: datetime_to_gmt_str},
         populate_by_name=True
     )

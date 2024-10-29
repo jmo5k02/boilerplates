@@ -1,7 +1,7 @@
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
@@ -44,7 +44,7 @@ def create_application() -> FastAPI:
             "allow_methods": ["*"],
             "allow_headers": ["*"],
         }
-    )
+    ) 
 
     # Exception Handlers
 
@@ -52,7 +52,7 @@ def create_application() -> FastAPI:
     application.include_router(router=api_router, prefix="/api/v1", tags=["v1"])
 
     @application.get("/redirect/{address}")
-    async def redirect(address: str):
+    async def redirect(address: str, request: Request):
         return RedirectResponse(f'http://{address}.de', status_code=status.HTTP_302_FOUND)
 
     return application

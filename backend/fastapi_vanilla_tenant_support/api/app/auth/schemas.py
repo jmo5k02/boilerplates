@@ -24,7 +24,7 @@ class UserRegister(UserLogin):
 
 
 class UserLoginResponse(AppBaseSchema):
-    token: str
+    token: Optional[str] = Field(None, nullable=True)
 
 
 class UserRead(UserBase):
@@ -44,3 +44,7 @@ class UserCreate(AppBaseSchema):
     password: str
     tenants: Optional[list[UserTenant]] = []
     role: Optional[UserRoles] = Field(None, nullable=True)
+
+
+class UserRegisterResponse(AppBaseSchema):
+    token: Optional[str] = Field(None, nullable=True)

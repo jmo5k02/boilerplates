@@ -7,7 +7,6 @@ from fastapi.requests import Request
 
 from app.tenants.service import TenantService
 from app.tenants.schemas import TenantRead
-from app.db.deps import TenantDbSessionDep
 from app.auth.deps import get_current_user, reusable_oauth2
 
 log = logging.getLogger(__name__)
@@ -59,9 +58,9 @@ class BasePermission(ABC):
     @abstractmethod
     async def has_required_permissions(self, request: Request) -> bool: ...
 
-    async def __call__(self, request: Request, session: AsyncSession):
+    async def __call__(self, request: Request):
         tenant = None
-        _tenant_service = TenantService(session)
+        _tenant_service = TenantService(request.state.db)
         if request.path_params.get("tenant"):
             tenant = await _tenant_service.get_by_slug_or_raise(
                 tenant_in=TenantRead(
@@ -77,12 +76,12 @@ class BasePermission(ABC):
                 status_code=self.tenant_error_code, detail=self.tenant_error_msg
             )
 
-        user = await get_current_user(session, request)
+        user = await get_current_user(request)
         if not user:
             raise HTTPException(
                 status_code=self.user_error_code, detail=self.user_error_msg
             )
-
+        # TODO implement get_tenant_role
         self.role = user.get_tenant_role(tenant.slug)
         if not self.has_required_permissions(request):
             raise HTTPException(
@@ -113,10 +112,10 @@ class PermissionsDependency(object):
     def __init__(self, permission_classes: list[BasePermission]):
         self.permission_classes = permission_classes
 
-    async def __call__(self, request: Request, session: TenantDbSessionDep):
+    async def __call__(self, request: Request):
         for permission_class in self.permission_classes:
             p = permission_class()
-            await p(request=request, session = session)
+            await p(request=request)
 
 
 class TenantOwnerPermission(BasePermission):

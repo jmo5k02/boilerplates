@@ -1,5 +1,9 @@
+import secrets
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import HTTPException
+from typing import Optional
 from pydantic import UUID4
 
 from app.utils.base_classes.base_service import BaseService
@@ -15,6 +19,7 @@ from app.auth.schemas import (
     UserLogin,
     UserTenant,
 )
+from app.auth.utils import create_access_token, get_password_hash
 from app.tenants.service import TenantService
 from app.tenants.schemas import TenantRead
 
@@ -25,13 +30,17 @@ class AuthService(BaseService[AppUser, UserCreate, UserUpdate, UserRead]):
         self.tenant_service = TenantService(session)
         self.session = session
 
-    async def create_user(self, tenant: str, user_in: UserCreate) -> UserRead:
+    async def create_user(self, tenant: str, user_in: UserCreate) -> AppUser:
         """Creates new user"""
         password = bytes(user_in.password, "utf-8")
+        salt = secrets.token_bytes(32)
+
+        salted_password = password + salt
 
         user = AppUser(
             **user_in.model_dump(exclude={"password", "tenants", "role"}),
-            password=password
+            password=get_password_hash(salted_password),
+            salt=salt,
         )
 
         tenant = await self.tenant_service.get_by_slug_or_raise(
@@ -44,14 +53,24 @@ class AuthService(BaseService[AppUser, UserCreate, UserUpdate, UserRead]):
         
         user.tenants.append(AppUserTenant(tenant=tenant, role=role))
 
-        await self.session.add(user)
+        self.session.add(user)
         await self.session.commit()
         await self.session.refresh(user)
         return user
+    
+    async def create_user_or_raise(self, tenant: str, user_in: UserCreate) -> AppUser:
+        """Creates new user or raises"""
+        user = await self.get_by_email(user_in.email)
+        if user:
+            raise HTTPException(status_code=400, detail="User already exists")
+        user = await self.create_user(tenant, user_in)
+        # await self.session.refresh(user, ['tenants'])
+        return user
 
-    async def get_by_email(self, email: str) -> UserRead:
+    async def get_by_email(self, email: str) -> Optional[AppUser]:
         """Returns user by email"""
-        user = await self.repository.get_by_email(email)
+        user = await self.session.execute(select(AppUser).filter(AppUser.email == email))
+        user = user.scalar_one_or_none()
         return user
 
     async def create_or_update_tenant_role(self, user: AppUser, role_in: UserTenant):
@@ -78,3 +97,10 @@ class AuthService(BaseService[AppUser, UserCreate, UserUpdate, UserRead]):
 
         tenant_role.role = role_in.role
         return tenant_role
+
+
+    async def login_access_token(self, tenant: str, user_in: UserLogin) -> UserLoginResponse:
+        """Logs in and returns access token"""
+        user = await self.get_by_email(user_in.email)
+        if user and user.check_password(user_in.password):
+            return UserLoginResponse(token=user.token)

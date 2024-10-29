@@ -1,6 +1,6 @@
 import logging
 
-from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker
+from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker, AsyncSession
 from sqlalchemy.schema import CreateSchema
 from sqlalchemy import select, Table
 
@@ -54,10 +54,10 @@ async def init_database():
         await conn.run_sync(Base.metadata.create_all, tables=tables)
     
 
-    session = async_sessionmaker(bind=engine)
-    async with session() as session:
+    core_session = async_sessionmaker(bind=engine, class_=AsyncSession)
+    async with core_session() as core_session:
         default_tenant_query = select(Tenant).where(Tenant.name == "default")
-        default_tenant = await session.execute(default_tenant_query)
+        default_tenant = await core_session.execute(default_tenant_query)
         default_tenant = default_tenant.scalar_one_or_none()
 
         if not default_tenant:
@@ -69,21 +69,24 @@ async def init_database():
                 description="Default app tenant"
             )
 
-            session.add(default_tenant)
-            await session.commit()
+            core_session.add(default_tenant)
+            await core_session.commit()
+            await core_session.refresh(default_tenant)
+            
 
-    await init_schema(engine=engine, tenant=default_tenant)
+        await init_schema(engine=engine, tenant=default_tenant)
 
         
 async def init_schema(*, engine: AsyncEngine, tenant: Tenant) -> Tenant:
     """Initializes a new schema."""
+    print("Initializing schema")
     schema_name = f"{TENANT_SCHEMA_PREFIX}_{tenant.slug}"
 
-    if not await has_schema(engine, schema_name):
-        print("Creating default tenant schema")
-        async with engine.connect() as conn:
+    async with engine.begin() as conn:
+
+        if not await has_schema(engine, schema_name):
+            print("Creating default tenant schema")
             await conn.execute(CreateSchema(schema_name))
-            await conn.commit()
     
     tables = get_tenant_tables()
 
@@ -94,13 +97,11 @@ async def init_schema(*, engine: AsyncEngine, tenant: Tenant) -> Tenant:
     print("Creating default tenant tables", list(map(lambda x: x.name,tables)))
     async with schema_engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all, tables=tables)
-    
-    
-    async with engine.connect() as conn:
+        
         for t in tables:
             t.schema = schema_name
 
-    session = async_sessionmaker(bind=schema_engine)
+    session = async_sessionmaker(bind=schema_engine, class_=AsyncSession)
 
     async with session() as session:
         tenant = await session.merge(tenant)
