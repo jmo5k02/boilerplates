@@ -40,13 +40,10 @@ services:
       - ./api:/usr/src/app
     ports:
       - 8000:8000
-    command: [
-      uvicorn, app.main:app, 
-      --reload, 
-      --workers=1,
-      --host=0.0.0.0,
-      --port=8000,
-    ]
+    command: |
+      sh -c "
+      pip install -e . && 
+      uvicorn app.main:app --reload --workers=1 --host=0.0.0.0 --port=8000"
     environment:
       # General Application settings
       - PROJECT_NAME="FastAPI Vanilla BOILERPLATE"

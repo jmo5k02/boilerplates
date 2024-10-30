@@ -1,7 +1,7 @@
 import logging
 
 # from app.settings import LOG_LEVEL
-from app.utils.enums import AppEnum
+from app.common.utils.enums import AppEnum
 
 LOG_LEVEL = "DEBUG"
 

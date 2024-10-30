@@ -1,9 +1,10 @@
 from typing import Optional
 from pydantic import EmailStr, Field, UUID4
 
-from app.utils.base_classes.base_schema import AppBaseSchema
+from app.common.utils.base_classes.base_schema import AppBaseSchema
 from app.tenants.schemas import TenantRead
-from app.utils.enums import UserRoles
+from app.common.utils.enums import UserRoles
+
 
 class UserTenant(AppBaseSchema):
     tenant: TenantRead
@@ -14,6 +15,7 @@ class UserTenant(AppBaseSchema):
 class UserBase(AppBaseSchema):
     email: EmailStr
     tenants: Optional[list[UserTenant]] = []
+
 
 class UserLogin(UserBase):
     password: str
@@ -48,3 +50,7 @@ class UserCreate(AppBaseSchema):
 
 class UserRegisterResponse(AppBaseSchema):
     token: Optional[str] = Field(None, nullable=True)
+
+
+class UserTokenData(AppBaseSchema):
+    email: EmailStr

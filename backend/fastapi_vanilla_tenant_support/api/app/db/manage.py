@@ -9,7 +9,7 @@ from app.db.base import Base
 from app.db.engine import engine
 from app.tenants.models import Tenant
 from app.auth.models import AppUser, AppUserTenant
-from app.utils.sqlalchemy_utils import create_database, database_exists, has_schema
+from app.common.utils.sqlalchemy_utils import create_database, database_exists, has_schema
 
 log = logging.getLogger(__name__)
 

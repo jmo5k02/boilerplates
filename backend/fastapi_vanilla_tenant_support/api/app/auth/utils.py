@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timedelta, timezone
 from typing import Any
 from urllib.parse import urlencode
@@ -6,6 +7,9 @@ import jwt
 from passlib.context import CryptContext
 
 from app.settings import settings
+
+log = logging.getLogger(__name__)
+logging.getLogger('passlib').setLevel(logging.ERROR)
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

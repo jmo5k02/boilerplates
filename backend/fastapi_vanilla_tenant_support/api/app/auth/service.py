@@ -6,8 +6,8 @@ from fastapi import HTTPException
 from typing import Optional
 from pydantic import UUID4
 
-from app.utils.base_classes.base_service import BaseService
-from app.utils.enums import UserRoles
+from app.common.utils.base_classes.base_service import BaseService
+from app.common.utils.enums import UserRoles
 from app.auth.models import AppUser, AppUserTenant
 from app.auth.repository import AuthRepository
 from app.auth.schemas import (

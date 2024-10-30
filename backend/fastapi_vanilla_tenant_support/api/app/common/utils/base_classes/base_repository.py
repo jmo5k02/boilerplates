@@ -5,7 +5,7 @@ from typing import Generic, TypeVar, Type
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.base import Base
-from app.utils.base_classes.base_schema import AppBaseSchema
+from app.common.utils.base_classes.base_schema import AppBaseSchema
 
 
 DatabaseModelType = TypeVar('DatabaseModelType', bound=Base) # type: ignore

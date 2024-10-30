@@ -8,14 +8,16 @@ from fastapi.requests import Request
 from app.tenants.service import TenantService
 from app.tenants.schemas import TenantRead
 from app.auth.deps import get_current_user, reusable_oauth2
+from app.common.utils.enums import UserRoles
 
 log = logging.getLogger(__name__)
 
 
-def any_permission(permissions: list, request: Request):
-    for p in permissions:
+async def any_permission(permissions: list["BasePermission"], request: Request):
+    for p_class in permissions:
         try:
-            p(request=request)
+            p = p_class()
+            await p(request=request)
             return True
         except HTTPException:
             pass
@@ -35,7 +37,7 @@ class BasePermission(ABC):
 
     ```python
     class MozillaUserAgentPermission(BasePermission):
-        def has_required_permissions(self, request: Request):
+        async def has_required_permissions(self, request: Request):
             return request.headers.get('User-Agent') == "Mozilla/5.0")
     ```
     """
@@ -81,9 +83,10 @@ class BasePermission(ABC):
             raise HTTPException(
                 status_code=self.user_error_code, detail=self.user_error_msg
             )
-        # TODO implement get_tenant_role
+
         self.role = user.get_tenant_role(tenant.slug)
-        if not self.has_required_permissions(request):
+        print(self.role)
+        if not await self.has_required_permissions(request):
             raise HTTPException(
                 status_code=self.user_role_error_code, detail=self.user_role_error_msg
             )
@@ -120,4 +123,55 @@ class PermissionsDependency(object):
 
 class TenantOwnerPermission(BasePermission):
     async def has_required_permissions(self, request: Request) -> bool:
-        return False
+        print("OwnerPermission", self.role)
+        return self.role == UserRoles.owner
+
+class TenantManagerPermission(BasePermission):
+    async def has_required_permissions(self, request: Request) -> bool:
+        permission = await any_permission(
+            permissions=[
+                TenantOwnerPermission,
+            ],
+            request=request,
+        )
+        print("ManagerPermission", permission)
+        print("Role", self.role)
+        if not permission:
+            if self.role == UserRoles.manager:
+                return True
+        return permission
+    
+class TenantAdminPermission(BasePermission):
+    async def has_required_permissions(self, request: Request) -> bool:
+        permission = await any_permission(
+            permissions=[
+                TenantOwnerPermission,
+                TenantManagerPermission,
+            ],
+            request=request,
+        )
+        print("AdminPermission", permission)
+        print("Role", self.role)
+        if not permission:
+            if self.role == UserRoles.admin:
+                return True
+        return permission
+
+
+class TenantMemberPermission(BasePermission):
+    async def has_required_permissions(
+        self,
+        request: Request,
+    ) -> bool:
+        permission = await any_permission(
+            permissions=[
+                TenantOwnerPermission,
+                TenantManagerPermission,
+                TenantAdminPermission,
+            ],
+            request=request,
+        )
+        if not permission:
+            if self.role == UserRoles.member:
+                return True
+        return permission

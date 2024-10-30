@@ -9,6 +9,7 @@ from app.db.manage import init_database
 from app.extensions.logger import configure_logging
 from app.api import api_router
 from app.settings import settings
+from app.common.utils.cli import install_plugins
 
 
 log = logging.getLogger(__name__)
@@ -58,3 +59,6 @@ def create_application() -> FastAPI:
     return application
 
 app = create_application()
+
+print("Installing plugins")
+install_plugins()

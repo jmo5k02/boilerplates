@@ -13,7 +13,7 @@ from sqlalchemy_utils import TSVectorType
 from app.db.base import Base
 from app.db.mixin import TimeStampMixin, UUIDMixin, CrudMixin
 from app.tenants.models import Tenant
-from app.utils.enums import UserRoles
+from app.common.utils.enums import UserRoles
 from app.auth.utils import create_access_token, verify_password
 from app.settings import settings
 

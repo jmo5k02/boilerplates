@@ -1,0 +1,2 @@
+[plugins]
+app_basic_auth = app.plugins.app_core.plugin:BasicAuthProviderPlugin

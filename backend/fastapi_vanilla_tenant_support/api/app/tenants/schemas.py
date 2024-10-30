@@ -1,7 +1,7 @@
 from typing import Optional
 from pydantic import UUID4, Field
 
-from app.utils.base_classes.base_schema import AppBaseSchema
+from app.common.utils.base_classes.base_schema import AppBaseSchema
 
 class TenantBase(AppBaseSchema):
     name: str
