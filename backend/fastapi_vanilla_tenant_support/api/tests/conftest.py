@@ -52,15 +52,7 @@ async def db():
         schema_translate_map={None: "app_tenant_default", "app_core": "app_core"}
     )
 
-
-    # Session = async_scoped_session(
-    #     async_sessionmaker(
-    #         class_=AsyncSession, expire_on_commit=False, bind=schema_engine
-    #     ),
-    #     scopefunc=asyncio.current_task,
-    # )
     Session.configure(bind=schema_engine)
-    Session.get_bind
 
     yield 
     # await engine.dispose()
@@ -79,10 +71,10 @@ async def session(db):
     """
     Creates a database session for test duration
     """
-    session = Session()
-    async with session.begin():
+    async with Session() as session:
         yield session
-    await session.rollback()
+        await session.rollback()
+    await Session.remove()
 
 
 @pytest.fixture(scope="function")
@@ -97,6 +89,6 @@ async def client(
         yield ac
 
 
-# @pytest.fixture
-# async def tenant(session) -> Tenant:
-#     return await BaseFactory.create_factory(Tenant).create_async()
+@pytest.fixture
+async def tenant(session) -> Tenant:
+    return await BaseFactory.create_factory(Tenant).create_async()
