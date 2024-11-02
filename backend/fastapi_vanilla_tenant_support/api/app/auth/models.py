@@ -68,9 +68,8 @@ class AppUser(Base, TimeStampMixin, UUIDMixin, CrudMixin):
         return is_valid
 
 
-
     @property
-    def token(self):
+    def token(self) -> str:
         return create_access_token(self.email, timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES))
 
 
