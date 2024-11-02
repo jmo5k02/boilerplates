@@ -46,7 +46,7 @@ class BaseRepository(Generic[DatabaseModelType]):
     async def get_all(self, skip: int = 0, limit: int = 100) -> list[DatabaseModelType]:
         query = select(self.model).offset(skip).limit(limit)
         objects = await self.session.execute(query)
-        return objects.scalars()
+        return objects.scalars().all()
 
     async def update(self,id: int, obj_in: UpdateSchemaType) -> DatabaseModelType:
         db_obj = await self.get(id)

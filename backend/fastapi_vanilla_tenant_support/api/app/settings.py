@@ -40,6 +40,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "c754b741006a47cc556a821e54b5d41e3241d0dd19dadd379196da8f4476eff1"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8  # 8 days
+    MAX_LOGIN_ATTEMPTS: int = 5
     
     # Database settings
     POSTGRES_SERVER_HOST: str | None = None

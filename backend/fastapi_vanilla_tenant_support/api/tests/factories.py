@@ -25,6 +25,8 @@ class BaseFactory(SQLAlchemyFactory[T]):
     __set_foreign_keys__ = True
     __randomize_collection_length__ = True
     __min_collection_length__ = 1
+    __faker__ = fake
+    
     
     __async_persistence__ = SQLAASyncPersistence(Session)
     # Will be set by fixture
@@ -63,45 +65,13 @@ class UserFactory(BaseFactory):
     """Factory class for generating test User instances"""
     __model__ = AppUser
 
-    email = fake.email()
-    password = fake.password()
-    salt = fake.text(20)
 
-
-    async def create_sql_model(self, **kwargs) -> "AppUser":
-        """Create an instance of a User"""
-        from app.auth.models import AppUser
-
-        default_values = {
-            "email": fake.email(),
-            "password": fake.password(),
-            "salt": fake.text(20)
-        }
-
-        values = {**default_values, **kwargs}
-
-        return await self._create_and_persist_sql_model(AppUser, **values)
-    
-    async def create_pydantic_model(self, **kwargs):
-        """Create an instance of a Pydantic model"""
-        from app.auth.schemas import UserCreate
-
-        default_values = {
-            "email": fake.email(),
-            "password": fake.password(),
-        }
-
-        values = {**default_values, **kwargs}
-
-        return UserCreate(**values)
 
 
 class TenantFactory(BaseFactory):
     __model__ = Tenant
 
-    name = fake.company()
-    slug = fake.slug(name)
-    default = fake.boolean()
+
 
     
 
