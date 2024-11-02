@@ -40,11 +40,6 @@ settings = get_settings()
 
 print(settings.SQLALCHEMY_DATABASE_URI)
 
-engine: AsyncEngine = create_async_engine(
-    str(settings.SQLALCHEMY_DATABASE_URI),
-    echo=settings.TESTING,
-)
-
 @pytest.fixture(scope="session")
 async def db():
     print("Creating database")
@@ -65,6 +60,7 @@ async def db():
     #     scopefunc=asyncio.current_task,
     # )
     Session.configure(bind=schema_engine)
+    Session.get_bind
 
     yield 
     # await engine.dispose()
