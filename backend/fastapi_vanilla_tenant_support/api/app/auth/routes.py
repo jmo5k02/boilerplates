@@ -1,10 +1,15 @@
 import asyncio
 from sqlalchemy import select
-from fastapi import APIRouter, Depends, status, Request
+from pydantic import UUID4
+from fastapi import APIRouter, Depends, status, Request, HTTPException
 
-from app.db.deps import DbSessionDep, get_tenant_session
+from app.db.deps import DbSessionDep, get_tenant_session, CommonParametersDep
+from app.common.utils.enums import UserRoles
+from app.auth.deps import CurrentUserRoleDep, CurrentUserDep
 from app.auth.permissions import (
     TenantOwnerPermission,
+    TenantAdminPermission,
+    TenantManagerPermission,
     TenantMemberPermission,
     PermissionsDependency,
 )
@@ -14,6 +19,8 @@ from app.auth.schemas import (
     UserRead,
     UserLogin,
     UserLoginResponse,
+    UserUpdate,
+    UserTenant,
     UserRegisterResponse,
 )
 from .service import AuthService
@@ -23,47 +30,99 @@ user_router = APIRouter()
 
 
 @user_router.get(
-    "", dependencies=[Depends(PermissionsDependency([TenantMemberPermission]))], response_model=list[UserRead]
+    "",
+    dependencies=[Depends(PermissionsDependency([TenantMemberPermission]))],
+    response_model=list[UserRead],
+    status_code=status.HTTP_200_OK,
 )
-async def get_all_users(request: Request, session: DbSessionDep):
+async def get_all_users(tenant: str, session: DbSessionDep):
     """Get all users for a tenant"""
     _service = AuthService(session)
-    return {"message": "Get all users"}
+    users = await _service.get_all_tenant_users(tenant)
+    return users
 
 
-@user_router.post("", response_model=UserRead, status_code=status.HTTP_201_CREATED)
+@user_router.post(
+    "",
+    dependencies=[Depends(PermissionsDependency([TenantOwnerPermission]))],
+    response_model=UserRead,
+    status_code=status.HTTP_201_CREATED,
+)
 async def create_user(
     user_in: UserCreate,
+    session: DbSessionDep,
 ):
     """Create a user"""
-    pass
+    _service = AuthService(session)
+    user = await _service.get_by_email(user_in.email)
+    if user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="User with this email already exists"
+        )
+    user = await _service.create_user(user_in)
+    return user
 
 
 @user_router.get("/{user_id}", response_model=UserRead)
-async def get_user(user_id: int):
+async def get_user(user_id: UUID4, session: DbSessionDep):
     """Get a user"""
-    pass
+    _service = AuthService(session)
+    user = await _service.get_or_raise(user_id=user_id)
+    return user
 
 
-@user_router.put("/{user_id}", response_model=UserRead)
-async def update_user(user_id: int, user_in: UserCreate):
+@user_router.put(
+    "/{user_id}",
+    response_model=UserRead,
+)
+async def update_user(
+    user_id: UUID4,
+    user_in: UserUpdate,
+    session: DbSessionDep,
+    current_user: CurrentUserDep,
+    tenant: str,
+):
     """Update a user"""
-    pass
+    _service = AuthService(session)
+    user = await _service.get_or_raise(user_id=user_id)
+    current_user_tenant_role = current_user.get_tenant_role(tenant)
+    user_is_owner = current_user_tenant_role == UserRoles.owner
+    # The user himself can update his own user and Owner can update any user
+    if user.id != current_user.id and not user_is_owner:
+        raise HTTPException(status_code=403, detail="You can only update your own user")
+    
+    # Only the owner can update the user's role
+    if user_in.role:
+        if current_user_tenant_role != user_in.role:
+            if not user_is_owner:
+                raise HTTPException(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    detail=[
+                        {
+                            "msg": "You don't have permissions to update the user's role. Please, contact the organization's owner."
+                        }
+                    ],
+                )
+    # TODO finish the update user logic
+    user_in.tenants = []
+
+    user = await _service.update(user, user_in)
+    return user
 
 
 @auth_router.get("/me", response_model=UserRead)
-async def get_current_user():
+async def get_current_user(curent_user: CurrentUserDep):
     """Get current user"""
-    pass
+    return curent_user
 
 
 @auth_router.get("/myrole")
-async def get_current_user_role():
+async def get_current_user_role(role: CurrentUserRoleDep):
     """Get current user role"""
-    pass
+    return {"role": role}
 
 
-@auth_router.post("/login/access-token", response_model=UserLoginResponse)
+@auth_router.post("/login", response_model=UserLoginResponse)
 async def login_access_token(user_in: UserLogin, tenant: str, session: DbSessionDep):
     """Login and return access token"""
     _service = AuthService(session)

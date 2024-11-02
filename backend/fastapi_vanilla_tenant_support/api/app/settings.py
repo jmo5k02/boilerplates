@@ -1,5 +1,6 @@
 import logging
 from typing import Literal
+from functools import lru_cache
 
 from pydantic import computed_field
 from pydantic_core import MultiHostUrl
@@ -66,20 +67,21 @@ class Settings(BaseSettings):
                 password=self.POSTGRES_PASSWORD,
                 host=self.POSTGRES_SERVER_HOST,
                 port=self.POSTGRES_SERVER_PORT,
-                # path=f"{self.POSTGRES_DB}",
-                path="postgres"
+                path=f"{self.POSTGRES_DB}",
             )
             log.info(f"SQLALCHEMY_DATABASE_URI: {url}")
             return url
         
         else:
             error = f"Database settings are not set correctly \
-                        POSTGRES_SERVER_HOST: {self.POSTGRES_SERVER_HOST}, \
-                        POSTGRES_SERVER_PORT: {self.POSTGRES_SERVER_PORT}, \
-                        POSTGRES_USER: {self.POSTGRES_USER}"
+            POSTGRES_SERVER_HOST: {self.POSTGRES_SERVER_HOST}, \
+            POSTGRES_SERVER_PORT: {self.POSTGRES_SERVER_PORT}, \
+            POSTGRES_USER: {self.POSTGRES_USER}"
             log.error(error)
             raise ValueError(error)
         
+@lru_cache
+def get_settings() -> Settings:
+    return Settings()
 
-settings = Settings()
-
+settings = get_settings()

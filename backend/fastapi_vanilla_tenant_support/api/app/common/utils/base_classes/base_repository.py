@@ -3,6 +3,7 @@ This module contains the base repository class that all repositories should inhe
 """
 from typing import Generic, TypeVar, Type
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 
 from app.db.base import Base
 from app.common.utils.base_classes.base_schema import AppBaseSchema
@@ -33,15 +34,19 @@ class BaseRepository(Generic[DatabaseModelType]):
     async def create(self, obj_in: CreateSchemaType) -> DatabaseModelType:
         db_obj = self.model(**obj_in.model_dump())
         self.session.add(db_obj)
-        self.session.commit()
-        self.session.refresh(db_obj)
+        await self.session.commit()
+        await self.session.refresh(db_obj)
         return db_obj
 
     async def get(self, id: int) -> DatabaseModelType:
-        return self.session.query(self.model).filter(self.model.id == id).first()
+        query = select(self.model).where(self.model.id == id)
+        obj = await self.session.execute(query)
+        return obj.scalar_one_or_none()
 
     async def get_all(self, skip: int = 0, limit: int = 100) -> list[DatabaseModelType]:
-        return self.session.query(self.model).offset(skip).limit(limit).all()
+        query = select(self.model).offset(skip).limit(limit)
+        objects = await self.session.execute(query)
+        return objects.scalars()
 
     async def update(self,id: int, obj_in: UpdateSchemaType) -> DatabaseModelType:
         db_obj = await self.get(id)

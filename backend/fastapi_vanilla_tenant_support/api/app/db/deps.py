@@ -2,14 +2,16 @@ import logging
 from uuid import uuid1
 from typing import Annotated, AsyncGenerator, Final, Optional
 from contextvars import ContextVar
+from pydantic import Json
 
 from sqlalchemy import inspect
 from sqlalchemy.ext.asyncio import async_sessionmaker, async_scoped_session
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import Request, Depends
+from fastapi import Request, Depends, Query
 
 from app.db.engine import async_SessionLocal, engine
-from app.auth.deps import CurrentUserDep
+from app.auth.deps import CurrentUserDep, get_current_user_role
+from app.common.utils.enums import UserRoles
 
 log = logging.getLogger(__name__)
 
@@ -43,6 +45,7 @@ async def get_tenant_session(
     request_id = str(uuid1())
     tenant_slug = request.path_params.get("tenant", "default")
     schema = f"tenant_{tenant_slug}"
+    request.state.tenant = tenant_slug
     # Validate slug exists
     async with engine.begin() as conn:
         # Use run_sync to run synchronous operations
@@ -86,6 +89,13 @@ DbSessionDep = Annotated[AsyncSession, Depends(get_db)]
 async def common_parameters(
     current_user: CurrentUserDep,
     db_session: DbSessionDep,
+    page: int = Query(1, gt=1, lt=1000, description="Page number"),
+    items_per_page: int = Query(5, gt=-2, lt=1000),
+    query_str: str = Query(None, description="Query string"),
+    filter_spec: Json = Query([], alias="filter", description="Filter specification"),
+    sort_by: list[str] = Query([], description="Sort by"),
+    descending: list[bool] = Query([], description="Descending"),
+    role: UserRoles = Depends(get_current_user_role)
 ):
     """This can be expanded to include more common parameters to support i.e. querying"""
     return {

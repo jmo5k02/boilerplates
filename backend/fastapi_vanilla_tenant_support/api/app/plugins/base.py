@@ -20,7 +20,7 @@ class IPluginEvent:
 # stolen from https://github.com/getsentry/sentry/
 class PluginMount(type):
     def __new__(cls, name, bases, attrs):
-        new_cls: type[IPlugin2] = type.__new__(cls, name, bases, attrs)  # type: ignore[assignment]
+        new_cls: type[IPlugin] = type.__new__(cls, name, bases, attrs)  # type: ignore[assignment]
         if IPlugin in bases:
             return new_cls
         if not hasattr(new_cls, "title"):

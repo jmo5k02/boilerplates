@@ -1,14 +1,15 @@
 import logging
 from contextlib import asynccontextmanager
+from typing import Callable
 
 from fastapi import FastAPI, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
+from app.settings import Settings, get_settings
 from app.db.manage import init_database
 from app.extensions.logger import configure_logging
 from app.api import api_router
-from app.settings import settings
 from app.common.utils.cli import install_plugins
 
 
@@ -21,19 +22,19 @@ configure_logging()
 async def lifespan(app: FastAPI):
     print("Application starting up")
     log.info("Application starting up")
-    await init_database()
+    await init_database(get_settings())
     yield
     log.info("Application shutting down")
 
 
-def create_application() -> FastAPI:
+def create_application(_settings: Settings, lifespan_func: Callable) -> FastAPI:
     application = FastAPI(
         title="FastAPI Vanilla Tenant Support",
         description="A FastAPI application with tenant support",
         version="0.1.0",
-        lifespan=lifespan,
-        openapi_url=settings.OPENAPI_URL,
-        docs_url=settings.DOCS_URL,
+        lifespan=lifespan_func,
+        openapi_url=_settings.OPENAPI_URL,
+        docs_url=_settings.DOCS_URL,
     )
 
     # Middleware
@@ -52,13 +53,13 @@ def create_application() -> FastAPI:
     # Routers
     application.include_router(router=api_router, prefix="/api/v1", tags=["v1"])
 
-    @application.get("/redirect/{address}")
-    async def redirect(address: str, request: Request):
-        return RedirectResponse(f'http://{address}.de', status_code=status.HTTP_302_FOUND)
+    @application.get("/api/v1/healthcheck", status_code=status.HTTP_200_OK)
+    async def healthcheck(request: Request):
+        return {"status": "ok"}
 
     return application
 
-app = create_application()
+app = create_application(get_settings(), lifespan)
 
 print("Installing plugins")
 install_plugins()

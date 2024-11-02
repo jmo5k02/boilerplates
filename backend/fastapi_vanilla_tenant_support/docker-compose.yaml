@@ -6,6 +6,7 @@ services:
   fastapi_vts_postgres:
     build:
       context: ./postgresql
+      dockerfile: Dockerfile
     command: postgres
     volumes:
       - fastapi_vts_pg_data:/var/lib/postgresql/data

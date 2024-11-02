@@ -60,7 +60,7 @@ class BaseService(
     obj_not_found_error = HTTPException(status_code=404, detail=f"{DatabaseModelType.__name__} not found")
 
     def __init__(self, repository: BaseRepository, session: AsyncSession):
-        self.repository = repository(session)
+        self.repository: BaseRepository = repository(session)
         self.output_schema: Type[OutputSchemaType] = self.__orig_bases__[0].__args__[3]
 
     async def create(self, obj_in: CreateSchemaType) -> OutputSchemaType:
@@ -80,7 +80,7 @@ class BaseService(
 
     async def get_all(self, skip: int = 0, limit: int = 100) -> list[OutputSchemaType]:
         all_objs = await self.repository.get_all(skip, limit)
-        return [self.output_schema(**obj.__dict__) for obj in all_objs]
+        return all_objs
 
     async def update(self, id: UUID4, obj_in: UpdateSchemaType) -> OutputSchemaType:
         obj = await self.repository.update(id, obj_in)

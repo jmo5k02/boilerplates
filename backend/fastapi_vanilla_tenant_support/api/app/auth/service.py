@@ -30,6 +30,29 @@ class AuthService(BaseService[AppUser, UserCreate, UserUpdate, UserRead]):
         self.tenant_service = TenantService(session)
         self.session = session
 
+    async def get_all_tenant_users(self, tenant: str) -> list[AppUser]:
+        """Get all users for a tenant"""
+        query = (
+            select(AppUser)
+            .join(AppUser.tenants)
+            .join(AppUserTenant.tenant)
+            .filter(AppUserTenant.tenant.has(slug=tenant))
+        )
+        users = await self.session.execute(query)
+        return users.scalars().all()
+    
+    async def get(self, user_id: UUID4) -> Optional[AppUser]:
+        """Get a user"""
+        user = await self.session.execute(select(AppUser).filter(AppUser.id == user_id))
+        return user.scalar()
+    
+    async def get_or_raise(self, user_id: UUID4) -> AppUser:
+        """Get a user or raise"""
+        user = await self.get(user_id)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return user
+
     async def create_user(self, tenant: str, user_in: UserCreate) -> AppUser:
         """Creates new user"""
         password = bytes(user_in.password, "utf-8")

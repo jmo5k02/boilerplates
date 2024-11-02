@@ -32,3 +32,4 @@ app/tenants/repository.py
 app/tenants/schemas.py
 app/tenants/service.py
 app/tenants/views.py
+tests/test_health.py

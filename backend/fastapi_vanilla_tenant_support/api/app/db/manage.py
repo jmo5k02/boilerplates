@@ -4,16 +4,21 @@ from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker, AsyncSession
 from sqlalchemy.schema import CreateSchema
 from sqlalchemy import select, Table
 
-from app.settings import settings
+from app.settings import Settings
 from app.db.base import Base
 from app.db.engine import engine
 from app.tenants.models import Tenant
 from app.auth.models import AppUser, AppUserTenant
-from app.common.utils.sqlalchemy_utils import create_database, database_exists, has_schema
+from app.common.utils.sqlalchemy_utils import (
+    create_database,
+    database_exists,
+    has_schema,
+)
 
 log = logging.getLogger(__name__)
 
 TENANT_SCHEMA_PREFIX = "tenant"
+
 
 def get_core_tables() -> list[Table]:
     """Fetches tables that belong to the core schema"""
@@ -35,24 +40,23 @@ def get_tenant_tables() -> list[Table]:
     return tenant_tables
 
 
-async def init_database():
+async def init_database(settings: Settings):
     """Initialize the database"""
     if not await database_exists(str(settings.SQLALCHEMY_DATABASE_URI)):
-        print("Creating database")
+        log.info("Creating database")
         await create_database(str(settings.SQLALCHEMY_DATABASE_URI))
 
     schema_name = "core"
     if not await has_schema(engine, schema_name):
-        print("Creating schema")
+        log.info("Creating schema")
         async with engine.connect() as conn:
             await conn.execute(CreateSchema(schema_name))
             await conn.commit()
 
     tables = get_core_tables()
-    print("Creating core tables", list(map(lambda x: x.name,tables)))
+    log.info(f"Creating core tables {list(map(lambda x: x.name, tables))}")
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all, tables=tables)
-    
 
     core_session = async_sessionmaker(bind=engine, class_=AsyncSession)
     async with core_session() as core_session:
@@ -61,22 +65,21 @@ async def init_database():
         default_tenant = default_tenant.scalar_one_or_none()
 
         if not default_tenant:
-            print("Creating default tenant")
+            log.info("Creating default tenant")
             default_tenant = Tenant(
-                name="default", 
+                name="default",
                 slug="default",
                 default=True,
-                description="Default app tenant"
+                description="Default app tenant",
             )
 
             core_session.add(default_tenant)
             await core_session.commit()
             await core_session.refresh(default_tenant)
-            
 
         await init_schema(engine=engine, tenant=default_tenant)
 
-        
+
 async def init_schema(*, engine: AsyncEngine, tenant: Tenant) -> Tenant:
     """Initializes a new schema."""
     print("Initializing schema")
@@ -85,19 +88,16 @@ async def init_schema(*, engine: AsyncEngine, tenant: Tenant) -> Tenant:
     async with engine.begin() as conn:
 
         if not await has_schema(engine, schema_name):
-            print("Creating default tenant schema")
+            log.info(f"Creating {tenant.name} tenant schema")
             await conn.execute(CreateSchema(schema_name))
-    
+
     tables = get_tenant_tables()
 
-    schema_engine = engine.execution_options(
-        schema_translate_map={None: schema_name}
-    )
+    schema_engine = engine.execution_options(schema_translate_map={None: schema_name})
 
-    print("Creating default tenant tables", list(map(lambda x: x.name,tables)))
+    log.info(f"Creating {tenant.name} tenant tables: {list(map(lambda x: x.name, tables))}")
     async with schema_engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all, tables=tables)
-        
         for t in tables:
             t.schema = schema_name
 

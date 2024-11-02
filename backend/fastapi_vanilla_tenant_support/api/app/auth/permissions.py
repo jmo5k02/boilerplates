@@ -56,6 +56,7 @@ class BasePermission(ABC):
     user_role_error_code = status.HTTP_403_FORBIDDEN
 
     role = None
+    is_superuser = False
 
     @abstractmethod
     async def has_required_permissions(self, request: Request) -> bool: ...
@@ -85,6 +86,7 @@ class BasePermission(ABC):
             )
 
         self.role = user.get_tenant_role(tenant.slug)
+        self.is_superuser = user.is_superuser()
         print(self.role)
         if not await self.has_required_permissions(request):
             raise HTTPException(
@@ -121,9 +123,13 @@ class PermissionsDependency(object):
             await p(request=request)
 
 
+class SuperUserPermission(BasePermission):
+    async def has_required_permissions(self, request: Request) -> bool:
+        return self.is_superuser
+    
+
 class TenantOwnerPermission(BasePermission):
     async def has_required_permissions(self, request: Request) -> bool:
-        print("OwnerPermission", self.role)
         return self.role == UserRoles.owner
 
 class TenantManagerPermission(BasePermission):
@@ -134,8 +140,6 @@ class TenantManagerPermission(BasePermission):
             ],
             request=request,
         )
-        print("ManagerPermission", permission)
-        print("Role", self.role)
         if not permission:
             if self.role == UserRoles.manager:
                 return True
@@ -150,8 +154,6 @@ class TenantAdminPermission(BasePermission):
             ],
             request=request,
         )
-        print("AdminPermission", permission)
-        print("Role", self.role)
         if not permission:
             if self.role == UserRoles.admin:
                 return True
