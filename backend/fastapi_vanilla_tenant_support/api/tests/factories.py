@@ -28,12 +28,6 @@ class BaseFactory(SQLAlchemyFactory[T]):
     __async_persistence__ = SQLAASyncPersistence(Session)
     __async_session__ = None
 
-    @classmethod
-    def set_session(cls, session: AsyncSession):
-        """Set the async session and persistence handler for the factory"""
-        cls.__async_session__ = session
-        cls.__async_persistence__ = SQLAASyncPersistence(session)
-
 
     # def __init__(self, db: AsyncSession):
     #     self.session = db
