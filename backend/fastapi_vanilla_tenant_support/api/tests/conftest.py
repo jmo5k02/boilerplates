@@ -91,4 +91,4 @@ async def client(
 
 @pytest.fixture
 async def tenant(session) -> Tenant:
-    return await BaseFactory.create_factory(Tenant).create_async()
+    return await TenantFactory.create_async()
