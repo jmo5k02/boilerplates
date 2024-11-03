@@ -31,14 +31,16 @@ from app.common.utils.sqlalchemy_utils import (
     drop_database,
 )
 from app.tenants.models import Tenant
+from app.auth.models import AppUser, AppUserTenant
 from app.db.engine import engine
 
 from .database import Session
-from .factories import UserFactory, TenantFactory, BaseFactory
+from .factories import UserFactory, TenantFactory, BaseFactory, UserTenantFactory
 
 settings = get_settings()
 
 print(settings.SQLALCHEMY_DATABASE_URI)
+
 
 @pytest.fixture(scope="session")
 async def db():
@@ -54,7 +56,7 @@ async def db():
 
     Session.configure(bind=schema_engine)
 
-    yield 
+    yield
     # await engine.dispose()
     await schema_engine.dispose()
     await drop_database(str(settings.SQLALCHEMY_DATABASE_URI))
@@ -92,3 +94,15 @@ async def client(
 @pytest.fixture
 async def tenant(session) -> Tenant:
     return await TenantFactory.create_async()
+
+
+@pytest.fixture
+async def user(session) -> Tenant:
+    return await UserFactory.create_async()
+
+
+@pytest.fixture
+async def user_tenant(session) -> tuple[AppUser, Tenant]:
+    user = await UserFactory.create_async()
+    tenant = await TenantFactory.create_async()
+    return user, tenant

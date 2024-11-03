@@ -3,10 +3,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import TypeVar
 from datetime import datetime
 from pydantic import BaseModel
-from polyfactory.factories.sqlalchemy_factory import SQLAlchemyFactory, T, SQLAASyncPersistence
+
+from polyfactory.factories.sqlalchemy_factory import SQLAlchemyFactory, T, SQLAASyncPersistence, SQLASyncPersistence
+from polyfactory import Use
 
 from app.db.base import Base
-from app.auth.models import AppUser
+from app.common.utils.enums import UserRoles
+from app.auth.models import AppUser, AppUserTenant
 from app.tenants.models import Tenant
 
 from .database import Session
@@ -29,36 +32,19 @@ class BaseFactory(SQLAlchemyFactory[T]):
     
     
     __async_persistence__ = SQLAASyncPersistence(Session)
+    __sync_persistence__= SQLASyncPersistence(Session)
     # Will be set by fixture
     __async_session__ = None
 
 
-    # def __init__(self, db: AsyncSession):
-    #     self.session = db
-
-    # async def create_sql_model(self, **kwargs) -> SqlModelClass:
-    #     """Create an instance of a SQL model that can be persisted into the database directly"""
-    #     raise NotImplementedError
-
-    # async def _create_and_persist_sql_model(self, model: SqlModelClass, **kwargs) -> SqlModelClass:
-    #     """Create and persist an instance of a model"""
-    #     instance = model(**kwargs)
-    #     self.session.add(instance)
-    #     await self.session.commit()
-    #     await self.session.refresh(instance)
-    #     return instance
-
-    # async def create_batch_sql(self, size: int, **kwargs) -> list[SqlModelClass]:
-    #     """Create a batch of instances of a model"""
-    #     return [await self.create_sql_model(**kwargs) for _ in range(size)]
-
-    # def create_pydantic_model(self, **kwargs) -> PydanticModelClass:
-    #     """Create an instance of a Pydantic model that can be used to test endpoints"""
-    #     raise NotImplementedError
+    def create_pydantic_model(self, **kwargs) -> PydanticModelClass:
+        """Create an instance of a Pydantic model that can be used to test endpoints"""
+        raise NotImplementedError
     
-    # def create_batch_pydantic(self, size: int, **kwargs) -> list[PydanticModelClass]:
-    #     """Create a batch of instances of a Pydantic model"""
-    #     return [self.create_pydantic_model(**kwargs) for _ in range(size)]
+    def create_batch_pydantic(self, size: int, **kwargs) -> list[PydanticModelClass]:
+        """Create a batch of instances of a Pydantic model"""
+        return [self.create_pydantic_model(**kwargs) for _ in range(size)]
+
 
 
 class UserFactory(BaseFactory):
@@ -66,12 +52,40 @@ class UserFactory(BaseFactory):
     __model__ = AppUser
 
 
+    def gen_password() -> str:
+        return bytes(fake.password(), "utf-8")
 
+    email = Use(BaseFactory.__faker__.email)
+    password = Use(gen_password)
+    salt = Use(gen_password)
+
+
+
+    
 
 class TenantFactory(BaseFactory):
     __model__ = Tenant
 
+    name = Use(BaseFactory.__faker__.company)
+    slug = Use(BaseFactory.__faker__.slug)
+    description = Use(BaseFactory.__faker__.sentence)
+    
 
+class UserTenantFactory(BaseFactory):
+    __model__ = AppUserTenant
+
+    @classmethod
+    async def create_user_with_tenant(cls) -> tuple[AppUser, Tenant]:
+        user = await UserFactory.create_async()
+        tenant = await TenantFactory.create_async()
+        
+        user_tenant = await cls.create_async(
+            user_id=user.id,
+            tenant_id=tenant.id,
+            role=UserRoles.member
+        )
+        
+        return user, tenant
 
     
 

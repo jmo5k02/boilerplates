@@ -35,7 +35,7 @@ class AppUser(Base, TimeStampMixin, UUIDMixin, CrudMixin):
     last_login: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
 
     tenants: Mapped[list["AppUserTenant"]] = relationship(
-        "AppUserTenant", back_populates="user", lazy="selectin"
+        "AppUserTenant", back_populates="user", lazy="selectin", uselist=True
     )
 
     search_vector: Mapped[TSVectorType] = mapped_column(
@@ -47,30 +47,31 @@ class AppUser(Base, TimeStampMixin, UUIDMixin, CrudMixin):
         for t in self.tenants:
             if t.tenant.slug == tenant_slug:
                 return t.role
-            
+
     def is_superuser(self):
-        return 
-    
+        return
+
     def check_password(self, password: str) -> bool:
         if not self.is_active:
             return False
-            
+
         if self.failed_login_attempts >= settings.MAX_LOGIN_ATTEMPTS:
             return False
-        
-        is_valid = verify_password(bytes(password, 'utf-8'), self.password, self.salt)
+
+        is_valid = verify_password(bytes(password, "utf-8"), self.password, self.salt)
         if not is_valid:
             self.failed_login_attempts += 1
         else:
             self.failed_login_attempts = 0
             self.last_login = datetime.utcnow()
-            
-        return is_valid
 
+        return is_valid
 
     @property
     def token(self) -> str:
-        return create_access_token(self.email, timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES))
+        return create_access_token(
+            self.email, timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+        )
 
 
 class AppUserTenant(Base, TimeStampMixin, UUIDMixin):
@@ -94,4 +95,3 @@ class AppUserTenant(Base, TimeStampMixin, UUIDMixin):
         default=UserRoles.member,
         nullable=False,
     )
-

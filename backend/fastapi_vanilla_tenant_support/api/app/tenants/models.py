@@ -17,11 +17,15 @@ class Tenant(CrudMixin, TimeStampMixin, UUIDMixin, Base):
     default: Mapped[bool] = mapped_column(Boolean, default=False)
     description: Mapped[str] = mapped_column(String, nullable=True)
 
-    users: Mapped[list["AppUserTenant"]] = relationship("AppUserTenant", back_populates="tenant")
+    users: Mapped[list["AppUserTenant"]] = relationship(
+        "AppUserTenant", uselist=True, back_populates="tenant"
+    )
 
     search_vector: Mapped[TSVectorType] = mapped_column(
-        TSVectorType("name", "description", weights={"name": "A", "description": "B"}), nullable=True
+        TSVectorType("name", "description", weights={"name": "A", "description": "B"}),
+        nullable=True,
     )
+
 
 def generate_slug(target, value, oldvalue, initiator):
     """Creates a reasonable slug based on organization name."""
