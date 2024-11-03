@@ -18,13 +18,16 @@ async def test_get_tenant(tenant, session):
 async def test_get_all_tenants(tenant, session):
     _service = TenantService(session)
     tenants = await _service.get_all()
+    tenants = list(tenants)
+    te = [t.dict() for t in tenants]
+    print(te)
     assert len(tenants) > 0
 
 
 @pytest.mark.anyio
-async def test_user_create(user_tenant, session):
+async def test_add_user_to_tenant(user_tenant, session):
     _service = TenantService(session)
     tenant = await _service.get_by_name(user_tenant[1].name)
-    user = await _service.add_user(tenant=tenant, user=user_tenant.user, role=user_tenant.role)
+    user = await _service.add_user(tenant=tenant, user=user_tenant[0], role=user_tenant[0].get_tenant_role(tenant.slug))
     assert user is not None
-    time.sleep(30)
+    

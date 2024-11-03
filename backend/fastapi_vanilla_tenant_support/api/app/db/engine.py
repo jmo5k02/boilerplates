@@ -14,7 +14,7 @@ settings = get_settings()
 
 engine: AsyncEngine = create_async_engine(
     str(settings.SQLALCHEMY_DATABASE_URI),
-    echo=settings.TESTING,
+    # echo=settings.TESTING,
 )
 
 async_SessionLocal: AsyncSession = async_sessionmaker(
