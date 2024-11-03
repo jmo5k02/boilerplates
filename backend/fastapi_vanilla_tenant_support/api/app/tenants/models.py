@@ -9,7 +9,7 @@ from app.db.base import Base
 from app.db.mixin import TimeStampMixin, CrudMixin, UUIDMixin
 
 
-class Tenant(CrudMixin, TimeStampMixin, UUIDMixin, Base):
+class Tenant(Base, CrudMixin, TimeStampMixin, UUIDMixin):
     __table_args__ = {"schema": "core"}
 
     name: Mapped[str] = mapped_column(String, unique=True)
@@ -17,8 +17,14 @@ class Tenant(CrudMixin, TimeStampMixin, UUIDMixin, Base):
     default: Mapped[bool] = mapped_column(Boolean, default=False)
     description: Mapped[str] = mapped_column(String, nullable=True)
 
-    users: Mapped[list["AppUserTenant"]] = relationship(
-        "AppUserTenant", uselist=True, back_populates="tenant"
+    user_associations: Mapped[list["AppUserTenant"]] = relationship(
+        back_populates="tenant",
+        cascade="all, delete-orphan",
+    )
+    users: Mapped[list["AppUser"]] = relationship(
+        secondary="core.app_user_tenant",
+        back_populates="tenants",
+        viewonly=True,
     )
 
     search_vector: Mapped[TSVectorType] = mapped_column(

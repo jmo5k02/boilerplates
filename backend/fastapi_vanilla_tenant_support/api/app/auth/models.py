@@ -1,3 +1,4 @@
+import uuid
 from datetime import timedelta, datetime
 from typing import Optional
 from sqlalchemy import (
@@ -34,8 +35,16 @@ class AppUser(Base, TimeStampMixin, UUIDMixin, CrudMixin):
     failed_login_attempts: Mapped[int] = mapped_column(default=0, nullable=False)
     last_login: Mapped[Optional[datetime]] = mapped_column(DateTime, nullable=True)
 
-    tenants: Mapped[list["AppUserTenant"]] = relationship(
-        "AppUserTenant", back_populates="user", lazy="selectin", uselist=True
+    tenant_associations: Mapped[list["AppUserTenant"]] = relationship(
+        back_populates="user",
+        cascade="all, delete-orphan",
+        lazy="selectin"
+    )
+    tenants: Mapped[list[Tenant]] = relationship(
+        secondary="core.app_user_tenant",
+        back_populates="users",
+        viewonly=True,
+        lazy="selectin"
     )
 
     search_vector: Mapped[TSVectorType] = mapped_column(
@@ -44,7 +53,7 @@ class AppUser(Base, TimeStampMixin, UUIDMixin, CrudMixin):
 
     def get_tenant_role(self, tenant_slug: str):
         """Get user role for a given tenant"""
-        for t in self.tenants:
+        for t in self.tenant_associations:
             if t.tenant.slug == tenant_slug:
                 return t.role
 
@@ -82,13 +91,15 @@ class AppUserTenant(Base, TimeStampMixin, UUIDMixin):
         {"schema": "core"},
     )
 
-    user_id: Mapped[str] = mapped_column(UUID, ForeignKey(AppUser.id))
-    user = relationship(AppUser, back_populates="tenants", lazy="selectin")
-
-    tenant_id: Mapped[str] = mapped_column(UUID, ForeignKey(Tenant.id))
-    tenant: Mapped[Tenant] = relationship(
-        Tenant, back_populates="users", lazy="selectin"
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("core.app_user.id", ondelete="CASCADE"), primary_key=True
     )
+    tenant_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("core.tenant.id", ondelete="CASCADE"),primary_key=True
+    )
+
+    user: Mapped[AppUser] = relationship(back_populates="tenant_associations")
+    tenant: Mapped[Tenant] = relationship(back_populates="user_associations")
 
     role: Mapped[UserRoles] = mapped_column(
         SQLAlchemyEnum(UserRoles, create_constraint=True, schema="core"),

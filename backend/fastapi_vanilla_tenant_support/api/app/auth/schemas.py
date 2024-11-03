@@ -8,13 +8,13 @@ from app.common.utils.enums import UserRoles
 
 class UserTenant(AppBaseSchema):
     tenant: TenantRead
-    default: Optional[bool] = False
+    default: Optional[bool] = Field(None, nullable=True)
     role: Optional[UserRoles] = Field(None, nullable=True)
 
 
 class UserBase(AppBaseSchema):
     email: EmailStr
-    tenants: Optional[list[UserTenant]] = []
+    tenant_associations: Optional[list[UserTenant]] = []
 
 
 class UserLogin(UserBase):
@@ -37,14 +37,14 @@ class UserRead(UserBase):
 class UserUpdate(AppBaseSchema):
     email: Optional[EmailStr] = None
     password: Optional[str] = None
-    tenants: Optional[list[UserTenant]] = []
+    tenants: Optional[list[TenantRead]] = []
     role: Optional[UserRoles] = Field(None, nullable=True)
 
 
 class UserCreate(AppBaseSchema):
     email: EmailStr
     password: str
-    tenants: Optional[list[UserTenant]] = []
+    tenants: Optional[list[TenantRead]] = []
     role: Optional[UserRoles] = Field(None, nullable=True)
 
 

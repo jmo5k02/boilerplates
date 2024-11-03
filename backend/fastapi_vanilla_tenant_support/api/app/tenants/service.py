@@ -1,7 +1,7 @@
 import logging
 from typing import Optional
 
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import UUID4, ValidationError
 
@@ -71,16 +71,30 @@ class TenantService(BaseService[Tenant, TenantCreate, TenantUpdate, TenantRead])
     async def create(self, obj_in: TenantCreate) -> Tenant:
         """Creates a new tenant"""
         tenant = await self.repository.create(obj_in)
-        tenant = await init_schema(engine, tenant)
+        tenant = await init_schema(engine=engine, tenant=tenant)
         return tenant
 
     async def update(self, tenant: Tenant, obj_in: TenantUpdate) -> Tenant:
         """Updates a tenant by ID"""
-        pass
+        for field in tenant.dict():
+            if field in obj_in.model_dump():
+                print("field", field)
+                print("obj_in", getattr(obj_in, field))
+                setattr(tenant, field, getattr(obj_in, field))
+        await self.session.commit()
+        await self.session.refresh(tenant)
+        return tenant
 
     async def delete(self, tenant_id: UUID4) -> bool:
         """Deletes a tenant by ID"""
-        pass
+        try:
+            await self.session.execute(delete(Tenant).where(Tenant.id == tenant_id))
+            await self.session.commit()
+            return True
+        except Exception as e:
+            log.exception(e)
+            await self.session.rollback()
+            return False
 
     async def add_user(self, user, tenant: Tenant, role) -> Tenant:
         """Adds a user to a tenant"""

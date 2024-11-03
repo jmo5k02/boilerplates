@@ -34,7 +34,7 @@ class AuthService(BaseService[AppUser, UserCreate, UserUpdate, UserRead]):
         """Get all users for a tenant"""
         query = (
             select(AppUser)
-            .join(AppUser.tenants)
+            .join(AppUser.tenant_associations)
             .join(AppUserTenant.tenant)
             .filter(AppUserTenant.tenant.has(slug=tenant))
         )

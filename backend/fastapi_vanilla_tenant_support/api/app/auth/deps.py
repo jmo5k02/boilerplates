@@ -46,24 +46,6 @@ async def get_current_user(request: Request) -> AppUser:
 
     return user
 
-    # token = await reusable_oauth2(request)
-    # session = request.state.db
-    # print(session)
-    # print(token)
-    # # TODO Use auth plugins here to support multiple auth methods
-    # # Try to decode the jwt
-    # try:
-    #     payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
-    #     email: str = payload.get("sub")
-    #     if email is None:
-    #         logger.error("No email in token")
-    #         raise credentials_exception
-    #     token_data = UserTokenData(email=email)
-    # except InvalidTokenError as e:
-    #     logger.error("Invalid token: %s", e)
-    #     raise credentials_exception
-    # return token_data
-
 
 CurrentUserDep = Annotated[AppUser, Depends(get_current_user)]
 

@@ -20,7 +20,6 @@ from app.auth.schemas import (
     UserLogin,
     UserLoginResponse,
     UserUpdate,
-    UserTenant,
     UserRegisterResponse,
 )
 from .service import AuthService
@@ -113,6 +112,9 @@ async def update_user(
 @auth_router.get("/me", response_model=UserRead)
 async def get_current_user(curent_user: CurrentUserDep):
     """Get current user"""
+    print("curent_user", curent_user)
+    print("curent_user", curent_user.__dict__)
+    print("curent_user", curent_user.tenants[0].name)
     return curent_user
 
 
